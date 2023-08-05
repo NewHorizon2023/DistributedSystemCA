@@ -20,7 +20,7 @@ public class ControlPanel extends ControlPanelImplBase {
 		server.awaitTermination();
 	}
 
-	/**
+	/** 
 	 * <pre>
 	 * RPC Method 1: SetDeviceStatus
 	 * </pre>
