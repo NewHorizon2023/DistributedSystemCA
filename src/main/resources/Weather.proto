@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "Weather";
+option java_outer_classname = "WeatherImpl";
+
+package Weather;
+
+// Service 2: WeatherService
+service Weather {
+    // RPC Method 1: GetTemperature
+    rpc GetTemperature (WeatherLocation) returns (TemperatureResponse) {}
+
+    // RPC Method 2: GetHumidity
+    rpc GetHumidity (WeatherLocation) returns (HumidityResponse) {}
+
+    // RPC Method 3: GetWeatherForecast
+    rpc GetWeatherForecast (WeatherForecastRequest) returns (WeatherForecastResponse) {}
+}
+
+message WeatherLocation {
+    double latitude = 1;
+    double longitude = 2;
+}
+
+message TemperatureResponse {
+    double temperature = 1;
+}
+
+message HumidityResponse {
+    double humidity = 1;
+}
+
+message WeatherForecastRequest {
+    double latitude = 1;
+    double longitude = 2;
+    string start_date = 3;
+    string end_date = 4;
+}
+
+message WeatherForecastResponse {
+    repeated WeatherReading weather_readings = 1;
+}
+
+message WeatherReading {
+    double temperature = 1;
+    double humidity = 2;
+    double wind_speed = 3;
+    double precipitation = 4;
+    string timestamp = 5;
+}

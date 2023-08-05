@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "PollutionSensor";
+option java_outer_classname = "PollutionSensorImpl";
+
+package PollutionSensor;
+
+// Service 1: PollutionSensorService
+service PollutionSensor {
+    // RPC Method 1: GetPollutionLevel
+    rpc GetPollutionLevel (PollutionLocation) returns (PollutionReading) {}
+
+    // RPC Method 2: SubscribeToPollutionUpdates
+    rpc SubscribeToPollutionUpdates (PollutionLocation) returns (stream PollutionReading) {}
+
+    // RPC Method 3: GetPollutionHistory
+    rpc GetPollutionHistory (PollutionHistoryRequest) returns (PollutionHistoryResponse) {}
+}
+
+message PollutionLocation {
+    double latitude = 1;
+    double longitude = 2;
+}
+
+message PollutionReading {
+    double pollution_level = 1;
+    string timestamp = 2;
+}
+
+message PollutionHistoryRequest {
+    double latitude = 1;
+    double longitude = 2;
+    string start_date = 3;
+    string end_date = 4;
+}
+
+message PollutionHistoryResponse {
+    repeated PollutionReading pollution_readings = 1;
+}

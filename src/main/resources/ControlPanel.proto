@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ControlPanel";
+option java_outer_classname = "ControlPanelImpl";
+
+package ControlPanel;
+
+// Service 3: ControlPanelService
+service ControlPanel {
+    // RPC Method 1: SetDeviceStatus
+    rpc SetDeviceStatus (DeviceStatusRequest) returns (DeviceStatusResponse) {}
+
+    // RPC Method 2: GetDeviceStatus
+    rpc GetDeviceStatus (DeviceIdentifier) returns (stream DeviceStatusResponse) {}
+
+    // RPC Method 3: StreamDeviceLogs
+    rpc StreamDeviceLogs (stream DeviceIdentifier) returns (stream DeviceLog) {}
+}
+
+message DeviceStatusRequest {
+    string device_id = 1;
+    bool status = 2;
+}
+
+message DeviceStatusResponse {
+    string device_id = 1;
+    bool status = 2;
+}
+
+message DeviceIdentifier {
+    string device_id = 1;
+}
+
+message DeviceLog {
+    string log_message = 1;
+    string timestamp = 2;
+}
