@@ -25,8 +25,8 @@ public class WeatherServiceImpl extends WeatherImplBase {
 	 * RPC Method 1: GetTemperature
 	 * </pre>
 	 */
-	public void getTemperature(track.weather.WeatherLocation request,
-			io.grpc.stub.StreamObserver<track.weather.TemperatureResponse> responseObserver) {
+	public void getTemperature(base.weather.WeatherLocation request,
+			io.grpc.stub.StreamObserver<base.weather.TemperatureResponse> responseObserver) {
 		// asyncUnimplementedUnaryCall(getGetTemperatureMethod(), responseObserver);
 	}
 
@@ -35,8 +35,8 @@ public class WeatherServiceImpl extends WeatherImplBase {
 	 * RPC Method 2: GetHumidity
 	 * </pre>
 	 */
-	public void getHumidity(track.weather.WeatherLocation request,
-			io.grpc.stub.StreamObserver<track.weather.HumidityResponse> responseObserver) {
+	public void getHumidity(base.weather.WeatherLocation request,
+			io.grpc.stub.StreamObserver<base.weather.HumidityResponse> responseObserver) {
 		// asyncUnimplementedUnaryCall(getGetHumidityMethod(), responseObserver);
 	}
 
@@ -45,8 +45,8 @@ public class WeatherServiceImpl extends WeatherImplBase {
 	 * RPC Method 3: GetWeatherForecast
 	 * </pre>
 	 */
-	public void getWeatherForecast(track.weather.WeatherForecastRequest request,
-			io.grpc.stub.StreamObserver<track.weather.WeatherForecastResponse> responseObserver) {
+	public void getWeatherForecast(base.weather.WeatherForecastRequest request,
+			io.grpc.stub.StreamObserver<base.weather.WeatherForecastResponse> responseObserver) {
 		// asyncUnimplementedUnaryCall(getGetWeatherForecastMethod(), responseObserver);
 	}
 

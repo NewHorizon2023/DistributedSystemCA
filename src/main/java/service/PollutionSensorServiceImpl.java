@@ -25,8 +25,8 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 * RPC Method 1: GetPollutionLevel
 	 * </pre>
 	 */
-	public void getPollutionLevel(track.pollutionSensor.PollutionLocation request,
-			io.grpc.stub.StreamObserver<track.pollutionSensor.PollutionReading> responseObserver) {
+	public void getPollutionLevel(base.pollutionSensor.PollutionLocation request,
+			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
 		// asyncUnimplementedUnaryCall(getGetPollutionLevelMethod(), responseObserver);
 	}
 
@@ -35,8 +35,8 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 * RPC Method 2: SubscribeToPollutionUpdates
 	 * </pre>
 	 */
-	public void subscribeToPollutionUpdates(track.pollutionSensor.PollutionLocation request,
-			io.grpc.stub.StreamObserver<track.pollutionSensor.PollutionReading> responseObserver) {
+	public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
+			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
 		// asyncUnimplementedUnaryCall(getSubscribeToPollutionUpdatesMethod(),
 		// responseObserver);
 	}
@@ -46,8 +46,8 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 * RPC Method 3: GetPollutionHistory
 	 * </pre>
 	 */
-	public void getPollutionHistory(track.pollutionSensor.PollutionHistoryRequest request,
-			io.grpc.stub.StreamObserver<track.pollutionSensor.PollutionHistoryResponse> responseObserver) {
+	public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
+			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionHistoryResponse> responseObserver) {
 		// asyncUnimplementedUnaryCall(getGetPollutionHistoryMethod(),
 		// responseObserver);
 	}

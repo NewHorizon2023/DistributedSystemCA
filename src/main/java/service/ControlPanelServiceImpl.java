@@ -27,6 +27,18 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	 */
 	public void setDeviceStatus(base.controlPanel.DeviceStatusRequest request,
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
+		
+		String deviceId = request.getDeviceId();
+		System.out.println("device id is: " + deviceId);
+		System.out.println("device status is: " + request.getStatus());
+		base.controlPanel.DeviceStatusResponse.Builder builder = base.controlPanel.DeviceStatusResponse.newBuilder();
+		
+		builder.setDeviceId("nci-001");
+		builder.setStatus(true);
+		
+		base.controlPanel.DeviceStatusResponse response = builder.build();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
 
 		// asyncUnimplementedUnaryCall(getSetDeviceStatusMethod(), responseObserver);
 
