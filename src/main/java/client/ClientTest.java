@@ -7,7 +7,6 @@ import io.grpc.ManagedChannelBuilder;
 public class ClientTest {
 	public static void main(String[] args) {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanleService = ControlPanelGrpc.newBlockingStub(channel);
 			base.controlPanel.DeviceStatusRequest.Builder builder = base.controlPanel.DeviceStatusRequest.newBuilder();
