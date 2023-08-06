@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "track.weather";
+option java_package = "base.weather";
 option java_outer_classname = "WeatherImpl";
 
 package Weather;
