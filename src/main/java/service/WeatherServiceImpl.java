@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import track.weather.WeatherGrpc.WeatherImplBase;
+import base.weather.WeatherGrpc.WeatherImplBase;
 
-public class Weather extends WeatherImplBase {
+public class WeatherServiceImpl extends WeatherImplBase {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		Weather weather = new Weather();
+		WeatherServiceImpl weatherServiceImpl = new WeatherServiceImpl();
 
 		int port = 50053;
 
-		Server server = ServerBuilder.forPort(port).addService(weather).build().start();
+		Server server = ServerBuilder.forPort(port).addService(weatherServiceImpl).build().start();
 
 		System.out.println("Service-Weather started, listening on " + port);
 

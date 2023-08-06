@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import track.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
+import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
 
-public class PollutionSensor extends PollutionSensorImplBase {
+public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		PollutionSensor pollutionSensor = new PollutionSensor();
+		PollutionSensorServiceImpl pollutionSensorServiceImpl = new PollutionSensorServiceImpl();
 
 		int port = 50052;
 
-		Server server = ServerBuilder.forPort(port).addService(pollutionSensor).build().start();
+		Server server = ServerBuilder.forPort(port).addService(pollutionSensorServiceImpl).build().start();
 
 		System.out.println("Service-Weather started, listening on " + port);
 

@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import ds.service1.Service1Grpc;
 import ds.service2.Service2Grpc;
 import ds.service3.Service3Grpc;
-import ds.service4.Service4Grpc;
+import base.service4.Service4Grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
