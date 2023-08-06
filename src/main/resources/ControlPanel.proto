@@ -6,7 +6,7 @@ option java_outer_classname = "ControlPanelImpl";
 
 package ControlPanel;
 
-// Service 3: ControlPanelService
+// Service 3: ControlPanelService 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
 service ControlPanel {
     // RPC Method 1: SetDeviceStatus
     rpc SetDeviceStatus (DeviceStatusRequest) returns (DeviceStatusResponse) {}
