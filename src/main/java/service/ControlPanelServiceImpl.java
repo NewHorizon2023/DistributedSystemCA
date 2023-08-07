@@ -2,10 +2,9 @@ package service;
 
 import java.io.IOException;
 
+import base.controlPanel.ControlPanelGrpc.ControlPanelImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import base.controlPanel.ControlPanelGrpc.ControlPanelImplBase;
-import base.controlPanel.DeviceStatusResponse;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
