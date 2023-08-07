@@ -45,12 +45,6 @@
 			<artifactId>javax.annotation-api</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-
-		<dependency>
-			<groupId>my</groupId>
-			<artifactId>project</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
   </dependencies>
 
 	<properties>
