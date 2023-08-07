@@ -7,13 +7,15 @@ import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import util.PortUtil;
 import util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
-		int port = 50051;
+		int port = PortUtil.getPort(PortUtil.SERVER_PORT_1);
+
 		Server server = ServerBuilder.forPort(port).addService(controlPanel).build().start();
 		System.out.println("Service-Weather started, listening on " + port);
 		server.awaitTermination();

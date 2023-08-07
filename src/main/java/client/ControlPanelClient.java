@@ -6,11 +6,13 @@ import base.controlPanel.ControlPanelGrpc;
 import base.controlPanel.DeviceStatusResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import util.PortUtil;
 
 public class ControlPanelClient {
 
 	public static void SetDeviceStatusInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1))
+				.usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanleService = ControlPanelGrpc.newBlockingStub(channel);
 			base.controlPanel.DeviceStatusRequest.Builder builder = base.controlPanel.DeviceStatusRequest.newBuilder();
@@ -22,17 +24,17 @@ public class ControlPanelClient {
 			boolean status = response.getStatus();
 			System.out.println(deviceId + ", " + status);
 		} catch (Exception e) {
-			throw new RuntimeException();
+			e.getStackTrace();
 		} finally {
 			channel.shutdown();
 		}
 	}
 
-	public static void GetDeviceStatusInvoke() {
-		ManagedChannel channel2 = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+	public void GetDeviceStatusInvoke() {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1)).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
-					.newBlockingStub(channel2);
+					.newBlockingStub(channel);
 			base.controlPanel.DeviceIdentifier.Builder builder = base.controlPanel.DeviceIdentifier.newBuilder();
 			builder.setDeviceId("11111");
 			base.controlPanel.DeviceIdentifier request = builder.build();
@@ -45,18 +47,24 @@ public class ControlPanelClient {
 			}
 
 		} catch (Exception e) {
-			e.setStackTrace(null);
+			e.getStackTrace();
 		} finally {
-			channel2.shutdown();
+			channel.shutdown();
 		}
 	}
-	
-	public static void StreamDeviceLogsInvoke() {
-		
+
+	public void StreamDeviceLogsInvoke() {
+		ManagedChannel channel = ManagedChannelBuilder
+				.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1)).usePlaintext().build();
+		try {
+
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
-
+		SetDeviceStatusInvoke();
 	}
 
 }
