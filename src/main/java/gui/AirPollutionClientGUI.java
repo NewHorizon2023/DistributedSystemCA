@@ -1,4 +1,4 @@
-package client;
+package gui;
 
 import java.awt.Dimension;
 
@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
-public class AirPollutionClient extends JFrame{
+public class AirPollutionClientGUI extends JFrame{
 
 	private static final long serialVersionUID = 8952395720478663745L;
 
-	public AirPollutionClient() {
+	public AirPollutionClientGUI() {
         setTitle("Air Pollution Tracking Client");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400, 300));
@@ -62,7 +62,7 @@ public class AirPollutionClient extends JFrame{
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            AirPollutionClient client = new AirPollutionClient();
+            AirPollutionClientGUI client = new AirPollutionClientGUI();
             client.setVisible(true);
         });
     }
