@@ -9,6 +9,8 @@ import javax.swing.SwingUtilities;
 
 public class AirPollutionClient extends JFrame{
 
+	private static final long serialVersionUID = 8952395720478663745L;
+
 	public AirPollutionClient() {
         setTitle("Air Pollution Tracking Client");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -51,8 +51,6 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	 */
 	public void getDeviceStatus(base.controlPanel.DeviceIdentifier request,
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
-		// asyncUnimplementedUnaryCall(getGetDeviceStatusMethod(), responseObserver);
-		String deviceId = request.getDeviceId();
 		// System.out.println("Request device id is: " + deviceId);
 		for (int i = 0; i < 5; i++) {
 			base.controlPanel.DeviceStatusResponse.Builder builder = base.controlPanel.DeviceStatusResponse.newBuilder();
