@@ -7,14 +7,14 @@ import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import util.PortUtil;
+import util.PropertiesUtil;
 import util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
-		int port = PortUtil.getPort(PortUtil.SERVER_PORT_1);
+		int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_1));
 
 		Server server = ServerBuilder.forPort(port).addService(controlPanel).build().start();
 		System.out.println("Service-Weather started, listening on " + port);
@@ -86,7 +86,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onNext(DeviceIdentifier value) {
-				// TODO Auto-generated method stub
+				System.out.println("Server 1 value is: " + value);
 
 			}
 
@@ -104,6 +104,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 				DeviceLog response = builder.build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
+				System.out.println("The server has finished receiving");
 			}
 
 		};

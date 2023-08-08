@@ -1,25 +1,38 @@
 package client;
 
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import base.controlPanel.ControlPanelGrpc;
+import base.controlPanel.DeviceIdentifier;
+import base.controlPanel.DeviceLog;
+import base.controlPanel.DeviceStatusRequest;
 import base.controlPanel.DeviceStatusResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import util.PortUtil;
+import io.grpc.stub.StreamObserver;
+import util.PropertiesUtil;
 
 public class ControlPanelClient {
 
-	public static void SetDeviceStatusInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1))
-				.usePlaintext().build();
+	private static int port;
+
+	private static String serverIP;
+
+	static {
+		serverIP = PropertiesUtil.getProperty(PropertiesUtil.SERVER_IP);
+		port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_1));
+	}
+
+	public static void setDeviceStatusInvoke() {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanleService = ControlPanelGrpc.newBlockingStub(channel);
-			base.controlPanel.DeviceStatusRequest.Builder builder = base.controlPanel.DeviceStatusRequest.newBuilder();
+			DeviceStatusRequest.Builder builder = DeviceStatusRequest.newBuilder();
 			builder.setDeviceId("0000");
 			builder.setStatus(false);
-			base.controlPanel.DeviceStatusRequest request = builder.build();
-			base.controlPanel.DeviceStatusResponse response = controlPanleService.setDeviceStatus(request);
+			DeviceStatusRequest request = builder.build();
+			DeviceStatusResponse response = controlPanleService.setDeviceStatus(request);
 			String deviceId = response.getDeviceId();
 			boolean status = response.getStatus();
 			System.out.println(deviceId + ", " + status);
@@ -30,14 +43,14 @@ public class ControlPanelClient {
 		}
 	}
 
-	public void GetDeviceStatusInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1)).usePlaintext().build();
+	public static void getDeviceStatusInvoke() {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
 					.newBlockingStub(channel);
-			base.controlPanel.DeviceIdentifier.Builder builder = base.controlPanel.DeviceIdentifier.newBuilder();
+			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
 			builder.setDeviceId("11111");
-			base.controlPanel.DeviceIdentifier request = builder.build();
+			DeviceIdentifier request = builder.build();
 			Iterator<base.controlPanel.DeviceStatusResponse> responseIterator = controlPanelBlockingStub
 					.getDeviceStatus(request);
 			while (responseIterator.hasNext()) {
@@ -53,18 +66,48 @@ public class ControlPanelClient {
 		}
 	}
 
-	public void StreamDeviceLogsInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder
-				.forAddress("localhost", PortUtil.getPort(PortUtil.SERVER_PORT_1)).usePlaintext().build();
+	public static void streamDeviceLogsInvoke() {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
 		try {
+			ControlPanelGrpc.ControlPanelStub controlPanelStub = ControlPanelGrpc.newStub(channel);
+			StreamObserver<DeviceIdentifier> requestObserver = controlPanelStub
+					.streamDeviceLogs(new StreamObserver<DeviceLog>() {
 
+						@Override
+						public void onNext(DeviceLog value) {
+							System.out.println("Client 1 value is: " + value);
+						}
+
+						@Override
+						public void onError(Throwable t) {
+
+						}
+
+						@Override
+						public void onCompleted() {
+							System.out.println("Client 1 is complated");
+						}
+					});
+
+			for (int i = 0; i < 10; i++) {
+				DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
+				builder.setDeviceId("001");
+				DeviceIdentifier request = builder.build();
+				requestObserver.onNext(request);
+
+				Thread.sleep(2000);
+			}
+
+			requestObserver.onCompleted();
+			channel.awaitTermination(12, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
-		SetDeviceStatusInvoke();
+//		setDeviceStatusInvoke();
+		streamDeviceLogsInvoke();
 	}
 
 }
