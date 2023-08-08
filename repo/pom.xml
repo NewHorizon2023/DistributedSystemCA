@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.nci</groupId>
-		<artifactId>SmartPollutionTrack</artifactId>
+		<artifactId>SmartPollutionTracking</artifactId>
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>repo</artifactId>

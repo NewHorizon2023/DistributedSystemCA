@@ -1,3 +1,4 @@
+package client;
 
 
 import java.util.Iterator;
@@ -11,21 +12,11 @@ import base.controlPanel.DeviceStatusResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import util.PropertiesUtil;
 
 public class ControlPanelClient {
 
-	private static int port;
-
-	private static String serverIP;
-
-	static {
-		serverIP = PropertiesUtil.getProperty(PropertiesUtil.SERVER_IP);
-		port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_1));
-	}
-
 	public static void setDeviceStatusInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanleService = ControlPanelGrpc.newBlockingStub(channel);
 			DeviceStatusRequest.Builder builder = DeviceStatusRequest.newBuilder();
@@ -44,7 +35,7 @@ public class ControlPanelClient {
 	}
 
 	public static void getDeviceStatusInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
 					.newBlockingStub(channel);
@@ -67,7 +58,7 @@ public class ControlPanelClient {
 	}
 
 	public static void streamDeviceLogsInvoke() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress(serverIP, port).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 		try {
 			ControlPanelGrpc.ControlPanelStub controlPanelStub = ControlPanelGrpc.newStub(channel);
 			StreamObserver<DeviceIdentifier> requestObserver = controlPanelStub

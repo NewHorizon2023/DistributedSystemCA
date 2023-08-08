@@ -1,13 +1,21 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.nci</groupId>
-  <artifactId>SmartPollutionTrack</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>api</module>
-  	<module>repo</module>
-  	<module>server</module>
-  	<module>client</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.nci</groupId>
+	<artifactId>SmartPollutionTracking</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<maven.compiler.source>19</maven.compiler.source>
+		<maven.compiler.target>19</maven.compiler.target>
+	</properties>
+
+
+	<modules>
+		<module>server</module>
+		<module>client</module>
+		<module>repo</module>
+	</modules>
 </project>
