@@ -6,6 +6,7 @@ import java.util.Random;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import util.DataUtil;
 import util.TimeUtil;
 import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
@@ -34,6 +35,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 		// TODO Try to use these 2 parameters.
 		double latitude = request.getLatitude();
 		double longitude = request.getLongitude();
+
 		// TODO Build a pollution data
 		PollutionReading.Builder builder = PollutionReading.newBuilder();
 		builder.setPollutionLevel(getPollutionLevel());
@@ -89,34 +91,8 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 * @return
 	 */
 	private static double getPollutionLevel() {
-		return getRandomDoubleInRange(1, 5);
+		return DataUtil.getRandomDoubleInRange(1, 5);
 
-	}
-
-	/**
-	 * Get random double value in range.
-	 * 
-	 * @param min
-	 * @param max
-	 * @return
-	 */
-	private static double getRandomDoubleInRange(double min, double max) {
-		if (min >= max) {
-			throw new IllegalArgumentException("min must be less than max");
-		}
-
-		// Create a random number generator.
-		Random random = new Random();
-
-		// Use the nextDouble method to generate a random double number in the range [0, 1)
-		double randomNumber = random.nextDouble();
-
-		// maps random double numbers to the specified range
-		double result = min + randomNumber * (max - min);
-
-		// Use DecimalFormat to keep two decimal places.
-		DecimalFormat df = new DecimalFormat("#.##");
-		return Double.parseDouble(df.format(result));
 	}
 
 }

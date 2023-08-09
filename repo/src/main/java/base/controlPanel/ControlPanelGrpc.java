@@ -158,7 +158,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: SetDeviceStatus
+     * Unary RPC Method: SetDeviceStatus
      * </pre>
      */
     public void setDeviceStatus(base.controlPanel.DeviceStatusRequest request,
@@ -168,7 +168,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetDeviceStatus
+     * Client Streaming RPC Method: GetDeviceStatus
      * </pre>
      */
     public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> getDeviceStatus(
@@ -178,7 +178,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: StreamDeviceLogs
+     * Bidirectional Streaming RPC Method: StreamDeviceLogs
      * </pre>
      */
     public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> streamDeviceLogs(
@@ -236,7 +236,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: SetDeviceStatus
+     * Unary RPC Method: SetDeviceStatus
      * </pre>
      */
     public void setDeviceStatus(base.controlPanel.DeviceStatusRequest request,
@@ -247,7 +247,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetDeviceStatus
+     * Client Streaming RPC Method: GetDeviceStatus
      * </pre>
      */
     public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> getDeviceStatus(
@@ -258,7 +258,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: StreamDeviceLogs
+     * Bidirectional Streaming RPC Method: StreamDeviceLogs
      * </pre>
      */
     public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> streamDeviceLogs(
@@ -291,7 +291,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: SetDeviceStatus
+     * Unary RPC Method: SetDeviceStatus
      * </pre>
      */
     public base.controlPanel.DeviceStatusResponse setDeviceStatus(base.controlPanel.DeviceStatusRequest request) {
@@ -323,7 +323,7 @@ public final class ControlPanelGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: SetDeviceStatus
+     * Unary RPC Method: SetDeviceStatus
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.controlPanel.DeviceStatusResponse> setDeviceStatus(

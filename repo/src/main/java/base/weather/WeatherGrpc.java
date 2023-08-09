@@ -158,7 +158,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetTemperature
+     * Unary RPC Method 1: GetTemperature
      * </pre>
      */
     public void getTemperature(base.weather.WeatherLocation request,
@@ -168,7 +168,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetHumidity
+     * Unary RPC Method 2: GetHumidity
      * </pre>
      */
     public void getHumidity(base.weather.WeatherLocation request,
@@ -178,7 +178,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetWeatherForecast
+     * Unary RPC Method 3: GetWeatherForecast
      * </pre>
      */
     public void getWeatherForecast(base.weather.WeatherForecastRequest request,
@@ -236,7 +236,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetTemperature
+     * Unary RPC Method 1: GetTemperature
      * </pre>
      */
     public void getTemperature(base.weather.WeatherLocation request,
@@ -247,7 +247,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetHumidity
+     * Unary RPC Method 2: GetHumidity
      * </pre>
      */
     public void getHumidity(base.weather.WeatherLocation request,
@@ -258,7 +258,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetWeatherForecast
+     * Unary RPC Method 3: GetWeatherForecast
      * </pre>
      */
     public void getWeatherForecast(base.weather.WeatherForecastRequest request,
@@ -291,7 +291,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetTemperature
+     * Unary RPC Method 1: GetTemperature
      * </pre>
      */
     public base.weather.TemperatureResponse getTemperature(base.weather.WeatherLocation request) {
@@ -301,7 +301,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetHumidity
+     * Unary RPC Method 2: GetHumidity
      * </pre>
      */
     public base.weather.HumidityResponse getHumidity(base.weather.WeatherLocation request) {
@@ -311,7 +311,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetWeatherForecast
+     * Unary RPC Method 3: GetWeatherForecast
      * </pre>
      */
     public base.weather.WeatherForecastResponse getWeatherForecast(base.weather.WeatherForecastRequest request) {
@@ -343,7 +343,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetTemperature
+     * Unary RPC Method 1: GetTemperature
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.weather.TemperatureResponse> getTemperature(
@@ -354,7 +354,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: GetHumidity
+     * Unary RPC Method 2: GetHumidity
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.weather.HumidityResponse> getHumidity(
@@ -365,7 +365,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetWeatherForecast
+     * Unary RPC Method 3: GetWeatherForecast
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.weather.WeatherForecastResponse> getWeatherForecast(

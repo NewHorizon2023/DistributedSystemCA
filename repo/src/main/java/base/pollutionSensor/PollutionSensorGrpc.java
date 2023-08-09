@@ -158,7 +158,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetPollutionLevel
+     * Unary RPC Method: GetPollutionLevel
      * </pre>
      */
     public void getPollutionLevel(base.pollutionSensor.PollutionLocation request,
@@ -168,7 +168,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: SubscribeToPollutionUpdates
+     * Server Streaming RPC Method: SubscribeToPollutionUpdates
      * </pre>
      */
     public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
@@ -178,7 +178,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetPollutionHistory
+     * Unary RPC Method 3: GetPollutionHistory
      * </pre>
      */
     public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
@@ -236,7 +236,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetPollutionLevel
+     * Unary RPC Method: GetPollutionLevel
      * </pre>
      */
     public void getPollutionLevel(base.pollutionSensor.PollutionLocation request,
@@ -247,7 +247,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: SubscribeToPollutionUpdates
+     * Server Streaming RPC Method: SubscribeToPollutionUpdates
      * </pre>
      */
     public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
@@ -258,7 +258,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetPollutionHistory
+     * Unary RPC Method 3: GetPollutionHistory
      * </pre>
      */
     public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
@@ -291,7 +291,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetPollutionLevel
+     * Unary RPC Method: GetPollutionLevel
      * </pre>
      */
     public base.pollutionSensor.PollutionReading getPollutionLevel(base.pollutionSensor.PollutionLocation request) {
@@ -301,7 +301,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 2: SubscribeToPollutionUpdates
+     * Server Streaming RPC Method: SubscribeToPollutionUpdates
      * </pre>
      */
     public java.util.Iterator<base.pollutionSensor.PollutionReading> subscribeToPollutionUpdates(
@@ -312,7 +312,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetPollutionHistory
+     * Unary RPC Method 3: GetPollutionHistory
      * </pre>
      */
     public base.pollutionSensor.PollutionHistoryResponse getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request) {
@@ -344,7 +344,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 1: GetPollutionLevel
+     * Unary RPC Method: GetPollutionLevel
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.pollutionSensor.PollutionReading> getPollutionLevel(
@@ -355,7 +355,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * RPC Method 3: GetPollutionHistory
+     * Unary RPC Method 3: GetPollutionHistory
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.pollutionSensor.PollutionHistoryResponse> getPollutionHistory(
