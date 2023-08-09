@@ -24,6 +24,11 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	}
 
 	/**
+	 * The status of sencor device which works normally only when it is "true".
+	 */
+	public static boolean deviceStatus;
+
+	/**
 	 * <pre>
 	 * RPC Method 1: SetDeviceStatus
 	 * </pre>
@@ -33,12 +38,11 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 
 		String deviceId = request.getDeviceId();
-//		System.out.println("device id is: " + deviceId);
-//		System.out.println("device status is: " + request.getStatus());
-		DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
+		deviceStatus = request.getStatus();
 
-		builder.setDeviceId("nci-001");
-		builder.setStatus(true);
+		DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
+		builder.setDeviceId(deviceId);
+		builder.setStatus(deviceStatus);
 
 		DeviceStatusResponse response = builder.build();
 		responseObserver.onNext(response);
@@ -61,8 +65,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 				System.out.println("recieved client data.");
 				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
 				builder.setDeviceId(value.getDeviceId());
-				// TODO get device status
-				builder.setStatus(true);
+				builder.setStatus(deviceStatus);
 				DeviceStatusResponse response = builder.build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
@@ -94,8 +97,8 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			public void onNext(DeviceIdentifier value) {
 				System.out.println("Server 1 value is: " + value);
 				DeviceLog.Builder builder = DeviceLog.newBuilder();
-				// TODO give some different logs
-				builder.setLogMessage("The device is running normally.");
+				builder.setLogMessage(
+						deviceStatus ? "The device is running normally." : "The device has stopped running.");
 				builder.setTimestamp(TimeUtil.getTimeNow());
 
 				DeviceLog response = builder.build();

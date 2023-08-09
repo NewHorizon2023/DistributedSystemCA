@@ -2,7 +2,6 @@ package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,11 +29,6 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	}
 
 	/**
-	 * The status of sencor device which works normally only when it is "true".
-	 */
-	public static boolean deviceStatus = true;
-
-	/**
 	 * Pollution history data.
 	 */
 	public static List<PollutionPojo> pollutionPojoList = new ArrayList<>();
@@ -52,7 +46,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 		double longitude = request.getLongitude();
 
 		// Generate pollution data while the devide status is "true".
-		while (deviceStatus) {
+		while (ControlPanelServiceImpl.deviceStatus) {
 			// Get pollution data.
 			double level = getPollutionLevel();
 			String timestamp = TimeUtil.getTimeNow();
