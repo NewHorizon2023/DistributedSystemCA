@@ -8,31 +8,41 @@ public interface WeatherForecastResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>double temperature = 1;</code>
+   * <code>double latitude = 1;</code>
+   */
+  double getLatitude();
+
+  /**
+   * <code>double longitude = 2;</code>
+   */
+  double getLongitude();
+
+  /**
+   * <code>double temperature = 3;</code>
    */
   double getTemperature();
 
   /**
-   * <code>double humidity = 2;</code>
+   * <code>double humidity = 4;</code>
    */
   double getHumidity();
 
   /**
-   * <code>double wind_speed = 3;</code>
+   * <code>double wind_speed = 5;</code>
    */
   double getWindSpeed();
 
   /**
-   * <code>double precipitation = 4;</code>
+   * <code>double precipitation = 6;</code>
    */
   double getPrecipitation();
 
   /**
-   * <code>string timestamp = 5;</code>
+   * <code>string timestamp = 7;</code>
    */
   java.lang.String getTimestamp();
   /**
-   * <code>string timestamp = 5;</code>
+   * <code>string timestamp = 7;</code>
    */
   com.google.protobuf.ByteString
       getTimestampBytes();

@@ -35,13 +35,14 @@ public final class WeatherImpl {
     java.lang.String[] descriptorData = {
       "\n\rWeather.proto\022\007Weather\"=\n\026WeatherForec" +
       "astRequest\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitud" +
-      "e\030\002 \001(\001\"~\n\027WeatherForecastResponse\022\023\n\013te" +
-      "mperature\030\001 \001(\001\022\020\n\010humidity\030\002 \001(\001\022\022\n\nwin" +
-      "d_speed\030\003 \001(\001\022\025\n\rprecipitation\030\004 \001(\001\022\021\n\t" +
-      "timestamp\030\005 \001(\t2d\n\007Weather\022Y\n\022GetWeather" +
-      "Forecast\022\037.Weather.WeatherForecastReques" +
-      "t\032 .Weather.WeatherForecastResponse\"\000B\035\n" +
-      "\014base.weatherB\013WeatherImplP\001b\006proto3"
+      "e\030\002 \001(\001\"\243\001\n\027WeatherForecastResponse\022\020\n\010l" +
+      "atitude\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001\022\023\n\013temp" +
+      "erature\030\003 \001(\001\022\020\n\010humidity\030\004 \001(\001\022\022\n\nwind_" +
+      "speed\030\005 \001(\001\022\025\n\rprecipitation\030\006 \001(\001\022\021\n\tti" +
+      "mestamp\030\007 \001(\t2d\n\007Weather\022Y\n\022GetWeatherFo" +
+      "recast\022\037.Weather.WeatherForecastRequest\032" +
+      " .Weather.WeatherForecastResponse\"\000B\035\n\014b" +
+      "ase.weatherB\013WeatherImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -66,7 +67,7 @@ public final class WeatherImpl {
     internal_static_Weather_WeatherForecastResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Weather_WeatherForecastResponse_descriptor,
-        new java.lang.String[] { "Temperature", "Humidity", "WindSpeed", "Precipitation", "Timestamp", });
+        new java.lang.String[] { "Latitude", "Longitude", "Temperature", "Humidity", "WindSpeed", "Precipitation", "Timestamp", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

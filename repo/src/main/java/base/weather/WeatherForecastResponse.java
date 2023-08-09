@@ -16,6 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private WeatherForecastResponse() {
+    latitude_ = 0D;
+    longitude_ = 0D;
     temperature_ = 0D;
     humidity_ = 0D;
     windSpeed_ = 0D;
@@ -49,25 +51,35 @@ private static final long serialVersionUID = 0L;
             break;
           case 9: {
 
-            temperature_ = input.readDouble();
+            latitude_ = input.readDouble();
             break;
           }
           case 17: {
 
-            humidity_ = input.readDouble();
+            longitude_ = input.readDouble();
             break;
           }
           case 25: {
 
-            windSpeed_ = input.readDouble();
+            temperature_ = input.readDouble();
             break;
           }
           case 33: {
 
+            humidity_ = input.readDouble();
+            break;
+          }
+          case 41: {
+
+            windSpeed_ = input.readDouble();
+            break;
+          }
+          case 49: {
+
             precipitation_ = input.readDouble();
             break;
           }
-          case 42: {
+          case 58: {
             java.lang.String s = input.readStringRequireUtf8();
 
             timestamp_ = s;
@@ -105,46 +117,64 @@ private static final long serialVersionUID = 0L;
             base.weather.WeatherForecastResponse.class, base.weather.WeatherForecastResponse.Builder.class);
   }
 
-  public static final int TEMPERATURE_FIELD_NUMBER = 1;
+  public static final int LATITUDE_FIELD_NUMBER = 1;
+  private double latitude_;
+  /**
+   * <code>double latitude = 1;</code>
+   */
+  public double getLatitude() {
+    return latitude_;
+  }
+
+  public static final int LONGITUDE_FIELD_NUMBER = 2;
+  private double longitude_;
+  /**
+   * <code>double longitude = 2;</code>
+   */
+  public double getLongitude() {
+    return longitude_;
+  }
+
+  public static final int TEMPERATURE_FIELD_NUMBER = 3;
   private double temperature_;
   /**
-   * <code>double temperature = 1;</code>
+   * <code>double temperature = 3;</code>
    */
   public double getTemperature() {
     return temperature_;
   }
 
-  public static final int HUMIDITY_FIELD_NUMBER = 2;
+  public static final int HUMIDITY_FIELD_NUMBER = 4;
   private double humidity_;
   /**
-   * <code>double humidity = 2;</code>
+   * <code>double humidity = 4;</code>
    */
   public double getHumidity() {
     return humidity_;
   }
 
-  public static final int WIND_SPEED_FIELD_NUMBER = 3;
+  public static final int WIND_SPEED_FIELD_NUMBER = 5;
   private double windSpeed_;
   /**
-   * <code>double wind_speed = 3;</code>
+   * <code>double wind_speed = 5;</code>
    */
   public double getWindSpeed() {
     return windSpeed_;
   }
 
-  public static final int PRECIPITATION_FIELD_NUMBER = 4;
+  public static final int PRECIPITATION_FIELD_NUMBER = 6;
   private double precipitation_;
   /**
-   * <code>double precipitation = 4;</code>
+   * <code>double precipitation = 6;</code>
    */
   public double getPrecipitation() {
     return precipitation_;
   }
 
-  public static final int TIMESTAMP_FIELD_NUMBER = 5;
+  public static final int TIMESTAMP_FIELD_NUMBER = 7;
   private volatile java.lang.Object timestamp_;
   /**
-   * <code>string timestamp = 5;</code>
+   * <code>string timestamp = 7;</code>
    */
   public java.lang.String getTimestamp() {
     java.lang.Object ref = timestamp_;
@@ -159,7 +189,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string timestamp = 5;</code>
+   * <code>string timestamp = 7;</code>
    */
   public com.google.protobuf.ByteString
       getTimestampBytes() {
@@ -189,20 +219,26 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (latitude_ != 0D) {
+      output.writeDouble(1, latitude_);
+    }
+    if (longitude_ != 0D) {
+      output.writeDouble(2, longitude_);
+    }
     if (temperature_ != 0D) {
-      output.writeDouble(1, temperature_);
+      output.writeDouble(3, temperature_);
     }
     if (humidity_ != 0D) {
-      output.writeDouble(2, humidity_);
+      output.writeDouble(4, humidity_);
     }
     if (windSpeed_ != 0D) {
-      output.writeDouble(3, windSpeed_);
+      output.writeDouble(5, windSpeed_);
     }
     if (precipitation_ != 0D) {
-      output.writeDouble(4, precipitation_);
+      output.writeDouble(6, precipitation_);
     }
     if (!getTimestampBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, timestamp_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, timestamp_);
     }
     unknownFields.writeTo(output);
   }
@@ -213,24 +249,32 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (latitude_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(1, latitude_);
+    }
+    if (longitude_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(2, longitude_);
+    }
     if (temperature_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, temperature_);
+        .computeDoubleSize(3, temperature_);
     }
     if (humidity_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(2, humidity_);
+        .computeDoubleSize(4, humidity_);
     }
     if (windSpeed_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(3, windSpeed_);
+        .computeDoubleSize(5, windSpeed_);
     }
     if (precipitation_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(4, precipitation_);
+        .computeDoubleSize(6, precipitation_);
     }
     if (!getTimestampBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, timestamp_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, timestamp_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -248,6 +292,14 @@ private static final long serialVersionUID = 0L;
     base.weather.WeatherForecastResponse other = (base.weather.WeatherForecastResponse) obj;
 
     boolean result = true;
+    result = result && (
+        java.lang.Double.doubleToLongBits(getLatitude())
+        == java.lang.Double.doubleToLongBits(
+            other.getLatitude()));
+    result = result && (
+        java.lang.Double.doubleToLongBits(getLongitude())
+        == java.lang.Double.doubleToLongBits(
+            other.getLongitude()));
     result = result && (
         java.lang.Double.doubleToLongBits(getTemperature())
         == java.lang.Double.doubleToLongBits(
@@ -277,6 +329,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + LATITUDE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getLatitude()));
+    hash = (37 * hash) + LONGITUDE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getLongitude()));
     hash = (37 * hash) + TEMPERATURE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         java.lang.Double.doubleToLongBits(getTemperature()));
@@ -424,6 +482,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      latitude_ = 0D;
+
+      longitude_ = 0D;
+
       temperature_ = 0D;
 
       humidity_ = 0D;
@@ -460,6 +522,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public base.weather.WeatherForecastResponse buildPartial() {
       base.weather.WeatherForecastResponse result = new base.weather.WeatherForecastResponse(this);
+      result.latitude_ = latitude_;
+      result.longitude_ = longitude_;
       result.temperature_ = temperature_;
       result.humidity_ = humidity_;
       result.windSpeed_ = windSpeed_;
@@ -513,6 +577,12 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(base.weather.WeatherForecastResponse other) {
       if (other == base.weather.WeatherForecastResponse.getDefaultInstance()) return this;
+      if (other.getLatitude() != 0D) {
+        setLatitude(other.getLatitude());
+      }
+      if (other.getLongitude() != 0D) {
+        setLongitude(other.getLongitude());
+      }
       if (other.getTemperature() != 0D) {
         setTemperature(other.getTemperature());
       }
@@ -558,15 +628,67 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private double latitude_ ;
+    /**
+     * <code>double latitude = 1;</code>
+     */
+    public double getLatitude() {
+      return latitude_;
+    }
+    /**
+     * <code>double latitude = 1;</code>
+     */
+    public Builder setLatitude(double value) {
+      
+      latitude_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double latitude = 1;</code>
+     */
+    public Builder clearLatitude() {
+      
+      latitude_ = 0D;
+      onChanged();
+      return this;
+    }
+
+    private double longitude_ ;
+    /**
+     * <code>double longitude = 2;</code>
+     */
+    public double getLongitude() {
+      return longitude_;
+    }
+    /**
+     * <code>double longitude = 2;</code>
+     */
+    public Builder setLongitude(double value) {
+      
+      longitude_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double longitude = 2;</code>
+     */
+    public Builder clearLongitude() {
+      
+      longitude_ = 0D;
+      onChanged();
+      return this;
+    }
+
     private double temperature_ ;
     /**
-     * <code>double temperature = 1;</code>
+     * <code>double temperature = 3;</code>
      */
     public double getTemperature() {
       return temperature_;
     }
     /**
-     * <code>double temperature = 1;</code>
+     * <code>double temperature = 3;</code>
      */
     public Builder setTemperature(double value) {
       
@@ -575,7 +697,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double temperature = 1;</code>
+     * <code>double temperature = 3;</code>
      */
     public Builder clearTemperature() {
       
@@ -586,13 +708,13 @@ private static final long serialVersionUID = 0L;
 
     private double humidity_ ;
     /**
-     * <code>double humidity = 2;</code>
+     * <code>double humidity = 4;</code>
      */
     public double getHumidity() {
       return humidity_;
     }
     /**
-     * <code>double humidity = 2;</code>
+     * <code>double humidity = 4;</code>
      */
     public Builder setHumidity(double value) {
       
@@ -601,7 +723,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double humidity = 2;</code>
+     * <code>double humidity = 4;</code>
      */
     public Builder clearHumidity() {
       
@@ -612,13 +734,13 @@ private static final long serialVersionUID = 0L;
 
     private double windSpeed_ ;
     /**
-     * <code>double wind_speed = 3;</code>
+     * <code>double wind_speed = 5;</code>
      */
     public double getWindSpeed() {
       return windSpeed_;
     }
     /**
-     * <code>double wind_speed = 3;</code>
+     * <code>double wind_speed = 5;</code>
      */
     public Builder setWindSpeed(double value) {
       
@@ -627,7 +749,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double wind_speed = 3;</code>
+     * <code>double wind_speed = 5;</code>
      */
     public Builder clearWindSpeed() {
       
@@ -638,13 +760,13 @@ private static final long serialVersionUID = 0L;
 
     private double precipitation_ ;
     /**
-     * <code>double precipitation = 4;</code>
+     * <code>double precipitation = 6;</code>
      */
     public double getPrecipitation() {
       return precipitation_;
     }
     /**
-     * <code>double precipitation = 4;</code>
+     * <code>double precipitation = 6;</code>
      */
     public Builder setPrecipitation(double value) {
       
@@ -653,7 +775,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>double precipitation = 4;</code>
+     * <code>double precipitation = 6;</code>
      */
     public Builder clearPrecipitation() {
       
@@ -664,7 +786,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object timestamp_ = "";
     /**
-     * <code>string timestamp = 5;</code>
+     * <code>string timestamp = 7;</code>
      */
     public java.lang.String getTimestamp() {
       java.lang.Object ref = timestamp_;
@@ -679,7 +801,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timestamp = 5;</code>
+     * <code>string timestamp = 7;</code>
      */
     public com.google.protobuf.ByteString
         getTimestampBytes() {
@@ -695,7 +817,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timestamp = 5;</code>
+     * <code>string timestamp = 7;</code>
      */
     public Builder setTimestamp(
         java.lang.String value) {
@@ -708,7 +830,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timestamp = 5;</code>
+     * <code>string timestamp = 7;</code>
      */
     public Builder clearTimestamp() {
       
@@ -717,7 +839,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timestamp = 5;</code>
+     * <code>string timestamp = 7;</code>
      */
     public Builder setTimestampBytes(
         com.google.protobuf.ByteString value) {

@@ -24,7 +24,7 @@ public class ControlPanelClient {
 			DeviceStatusResponse response = controlPanleService.setDeviceStatus(request);
 			String deviceId = response.getDeviceId();
 			boolean status = response.getStatus();
-			System.out.println(deviceId + ", " + status);
+//			System.out.println(deviceId + ", " + status);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {

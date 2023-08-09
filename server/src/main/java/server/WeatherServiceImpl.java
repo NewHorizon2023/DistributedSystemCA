@@ -37,6 +37,8 @@ public class WeatherServiceImpl extends WeatherImplBase {
 		WeatherForecastResponse.Builder builder = WeatherForecastResponse.newBuilder();
 
 		// Create weather data.
+		builder.setLatitude(latitude);
+		builder.setLongitude(longitude);
 		builder.setTemperature(DataUtil.getRandomDoubleInRange(-10, 30));
 		builder.setHumidity(DataUtil.getRandomDoubleInRange(0.3, 0.6));
 		builder.setWindSpeed(Math.round(DataUtil.getRandomDoubleInRange(0, 10)));
