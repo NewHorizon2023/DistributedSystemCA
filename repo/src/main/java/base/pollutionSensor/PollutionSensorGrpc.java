@@ -37,7 +37,7 @@ public final class PollutionSensorGrpc {
       fullMethodName = SERVICE_NAME + '/' + "GetPollutionLevel",
       requestType = base.pollutionSensor.PollutionLocation.class,
       responseType = base.pollutionSensor.PollutionReading.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<base.pollutionSensor.PollutionLocation,
       base.pollutionSensor.PollutionReading> getGetPollutionLevelMethod() {
     io.grpc.MethodDescriptor<base.pollutionSensor.PollutionLocation, base.pollutionSensor.PollutionReading> getGetPollutionLevelMethod;
@@ -46,7 +46,7 @@ public final class PollutionSensorGrpc {
         if ((getGetPollutionLevelMethod = PollutionSensorGrpc.getGetPollutionLevelMethod) == null) {
           PollutionSensorGrpc.getGetPollutionLevelMethod = getGetPollutionLevelMethod = 
               io.grpc.MethodDescriptor.<base.pollutionSensor.PollutionLocation, base.pollutionSensor.PollutionReading>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "PollutionSensor.PollutionSensor", "GetPollutionLevel"))
               .setSampledToLocalTracing(true)
@@ -60,38 +60,6 @@ public final class PollutionSensorGrpc {
         }
      }
      return getGetPollutionLevelMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<base.pollutionSensor.PollutionLocation,
-      base.pollutionSensor.PollutionReading> getSubscribeToPollutionUpdatesMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "SubscribeToPollutionUpdates",
-      requestType = base.pollutionSensor.PollutionLocation.class,
-      responseType = base.pollutionSensor.PollutionReading.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<base.pollutionSensor.PollutionLocation,
-      base.pollutionSensor.PollutionReading> getSubscribeToPollutionUpdatesMethod() {
-    io.grpc.MethodDescriptor<base.pollutionSensor.PollutionLocation, base.pollutionSensor.PollutionReading> getSubscribeToPollutionUpdatesMethod;
-    if ((getSubscribeToPollutionUpdatesMethod = PollutionSensorGrpc.getSubscribeToPollutionUpdatesMethod) == null) {
-      synchronized (PollutionSensorGrpc.class) {
-        if ((getSubscribeToPollutionUpdatesMethod = PollutionSensorGrpc.getSubscribeToPollutionUpdatesMethod) == null) {
-          PollutionSensorGrpc.getSubscribeToPollutionUpdatesMethod = getSubscribeToPollutionUpdatesMethod = 
-              io.grpc.MethodDescriptor.<base.pollutionSensor.PollutionLocation, base.pollutionSensor.PollutionReading>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "PollutionSensor.PollutionSensor", "SubscribeToPollutionUpdates"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.pollutionSensor.PollutionLocation.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.pollutionSensor.PollutionReading.getDefaultInstance()))
-                  .setSchemaDescriptor(new PollutionSensorMethodDescriptorSupplier("SubscribeToPollutionUpdates"))
-                  .build();
-          }
-        }
-     }
-     return getSubscribeToPollutionUpdatesMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<base.pollutionSensor.PollutionHistoryRequest,
@@ -168,17 +136,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * Server Streaming RPC Method: SubscribeToPollutionUpdates
-     * </pre>
-     */
-    public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
-        io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
-      asyncUnimplementedUnaryCall(getSubscribeToPollutionUpdatesMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetPollutionHistory
+     * Unary RPC Method: GetPollutionHistory
      * </pre>
      */
     public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
@@ -190,18 +148,11 @@ public final class PollutionSensorGrpc {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetPollutionLevelMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                base.pollutionSensor.PollutionLocation,
-                base.pollutionSensor.PollutionReading>(
-                  this, METHODID_GET_POLLUTION_LEVEL)))
-          .addMethod(
-            getSubscribeToPollutionUpdatesMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
                 base.pollutionSensor.PollutionLocation,
                 base.pollutionSensor.PollutionReading>(
-                  this, METHODID_SUBSCRIBE_TO_POLLUTION_UPDATES)))
+                  this, METHODID_GET_POLLUTION_LEVEL)))
           .addMethod(
             getGetPollutionHistoryMethod(),
             asyncUnaryCall(
@@ -241,24 +192,13 @@ public final class PollutionSensorGrpc {
      */
     public void getPollutionLevel(base.pollutionSensor.PollutionLocation request,
         io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
-      asyncUnaryCall(
+      asyncServerStreamingCall(
           getChannel().newCall(getGetPollutionLevelMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Server Streaming RPC Method: SubscribeToPollutionUpdates
-     * </pre>
-     */
-    public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
-        io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(getSubscribeToPollutionUpdatesMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetPollutionHistory
+     * Unary RPC Method: GetPollutionHistory
      * </pre>
      */
     public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
@@ -294,25 +234,15 @@ public final class PollutionSensorGrpc {
      * Unary RPC Method: GetPollutionLevel
      * </pre>
      */
-    public base.pollutionSensor.PollutionReading getPollutionLevel(base.pollutionSensor.PollutionLocation request) {
-      return blockingUnaryCall(
+    public java.util.Iterator<base.pollutionSensor.PollutionReading> getPollutionLevel(
+        base.pollutionSensor.PollutionLocation request) {
+      return blockingServerStreamingCall(
           getChannel(), getGetPollutionLevelMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Server Streaming RPC Method: SubscribeToPollutionUpdates
-     * </pre>
-     */
-    public java.util.Iterator<base.pollutionSensor.PollutionReading> subscribeToPollutionUpdates(
-        base.pollutionSensor.PollutionLocation request) {
-      return blockingServerStreamingCall(
-          getChannel(), getSubscribeToPollutionUpdatesMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetPollutionHistory
+     * Unary RPC Method: GetPollutionHistory
      * </pre>
      */
     public base.pollutionSensor.PollutionHistoryResponse getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request) {
@@ -344,18 +274,7 @@ public final class PollutionSensorGrpc {
 
     /**
      * <pre>
-     * Unary RPC Method: GetPollutionLevel
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<base.pollutionSensor.PollutionReading> getPollutionLevel(
-        base.pollutionSensor.PollutionLocation request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetPollutionLevelMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetPollutionHistory
+     * Unary RPC Method: GetPollutionHistory
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.pollutionSensor.PollutionHistoryResponse> getPollutionHistory(
@@ -366,8 +285,7 @@ public final class PollutionSensorGrpc {
   }
 
   private static final int METHODID_GET_POLLUTION_LEVEL = 0;
-  private static final int METHODID_SUBSCRIBE_TO_POLLUTION_UPDATES = 1;
-  private static final int METHODID_GET_POLLUTION_HISTORY = 2;
+  private static final int METHODID_GET_POLLUTION_HISTORY = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -388,10 +306,6 @@ public final class PollutionSensorGrpc {
       switch (methodId) {
         case METHODID_GET_POLLUTION_LEVEL:
           serviceImpl.getPollutionLevel((base.pollutionSensor.PollutionLocation) request,
-              (io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading>) responseObserver);
-          break;
-        case METHODID_SUBSCRIBE_TO_POLLUTION_UPDATES:
-          serviceImpl.subscribeToPollutionUpdates((base.pollutionSensor.PollutionLocation) request,
               (io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading>) responseObserver);
           break;
         case METHODID_GET_POLLUTION_HISTORY:
@@ -460,7 +374,6 @@ public final class PollutionSensorGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PollutionSensorFileDescriptorSupplier())
               .addMethod(getGetPollutionLevelMethod())
-              .addMethod(getSubscribeToPollutionUpdatesMethod())
               .addMethod(getGetPollutionHistoryMethod())
               .build();
         }

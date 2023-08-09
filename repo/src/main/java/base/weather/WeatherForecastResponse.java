@@ -16,7 +16,11 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private WeatherForecastResponse() {
-    weatherReadings_ = java.util.Collections.emptyList();
+    temperature_ = 0D;
+    humidity_ = 0D;
+    windSpeed_ = 0D;
+    precipitation_ = 0D;
+    timestamp_ = "";
   }
 
   @java.lang.Override
@@ -43,13 +47,30 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-              weatherReadings_ = new java.util.ArrayList<base.weather.WeatherReading>();
-              mutable_bitField0_ |= 0x00000001;
-            }
-            weatherReadings_.add(
-                input.readMessage(base.weather.WeatherReading.parser(), extensionRegistry));
+          case 9: {
+
+            temperature_ = input.readDouble();
+            break;
+          }
+          case 17: {
+
+            humidity_ = input.readDouble();
+            break;
+          }
+          case 25: {
+
+            windSpeed_ = input.readDouble();
+            break;
+          }
+          case 33: {
+
+            precipitation_ = input.readDouble();
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            timestamp_ = s;
             break;
           }
           default: {
@@ -67,9 +88,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-        weatherReadings_ = java.util.Collections.unmodifiableList(weatherReadings_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -87,39 +105,74 @@ private static final long serialVersionUID = 0L;
             base.weather.WeatherForecastResponse.class, base.weather.WeatherForecastResponse.Builder.class);
   }
 
-  public static final int WEATHER_READINGS_FIELD_NUMBER = 1;
-  private java.util.List<base.weather.WeatherReading> weatherReadings_;
+  public static final int TEMPERATURE_FIELD_NUMBER = 1;
+  private double temperature_;
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>double temperature = 1;</code>
    */
-  public java.util.List<base.weather.WeatherReading> getWeatherReadingsList() {
-    return weatherReadings_;
+  public double getTemperature() {
+    return temperature_;
+  }
+
+  public static final int HUMIDITY_FIELD_NUMBER = 2;
+  private double humidity_;
+  /**
+   * <code>double humidity = 2;</code>
+   */
+  public double getHumidity() {
+    return humidity_;
+  }
+
+  public static final int WIND_SPEED_FIELD_NUMBER = 3;
+  private double windSpeed_;
+  /**
+   * <code>double wind_speed = 3;</code>
+   */
+  public double getWindSpeed() {
+    return windSpeed_;
+  }
+
+  public static final int PRECIPITATION_FIELD_NUMBER = 4;
+  private double precipitation_;
+  /**
+   * <code>double precipitation = 4;</code>
+   */
+  public double getPrecipitation() {
+    return precipitation_;
+  }
+
+  public static final int TIMESTAMP_FIELD_NUMBER = 5;
+  private volatile java.lang.Object timestamp_;
+  /**
+   * <code>string timestamp = 5;</code>
+   */
+  public java.lang.String getTimestamp() {
+    java.lang.Object ref = timestamp_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      timestamp_ = s;
+      return s;
+    }
   }
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>string timestamp = 5;</code>
    */
-  public java.util.List<? extends base.weather.WeatherReadingOrBuilder> 
-      getWeatherReadingsOrBuilderList() {
-    return weatherReadings_;
-  }
-  /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-   */
-  public int getWeatherReadingsCount() {
-    return weatherReadings_.size();
-  }
-  /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-   */
-  public base.weather.WeatherReading getWeatherReadings(int index) {
-    return weatherReadings_.get(index);
-  }
-  /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-   */
-  public base.weather.WeatherReadingOrBuilder getWeatherReadingsOrBuilder(
-      int index) {
-    return weatherReadings_.get(index);
+  public com.google.protobuf.ByteString
+      getTimestampBytes() {
+    java.lang.Object ref = timestamp_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      timestamp_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -136,8 +189,20 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < weatherReadings_.size(); i++) {
-      output.writeMessage(1, weatherReadings_.get(i));
+    if (temperature_ != 0D) {
+      output.writeDouble(1, temperature_);
+    }
+    if (humidity_ != 0D) {
+      output.writeDouble(2, humidity_);
+    }
+    if (windSpeed_ != 0D) {
+      output.writeDouble(3, windSpeed_);
+    }
+    if (precipitation_ != 0D) {
+      output.writeDouble(4, precipitation_);
+    }
+    if (!getTimestampBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, timestamp_);
     }
     unknownFields.writeTo(output);
   }
@@ -148,9 +213,24 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (int i = 0; i < weatherReadings_.size(); i++) {
+    if (temperature_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, weatherReadings_.get(i));
+        .computeDoubleSize(1, temperature_);
+    }
+    if (humidity_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(2, humidity_);
+    }
+    if (windSpeed_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(3, windSpeed_);
+    }
+    if (precipitation_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(4, precipitation_);
+    }
+    if (!getTimestampBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, timestamp_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -168,8 +248,24 @@ private static final long serialVersionUID = 0L;
     base.weather.WeatherForecastResponse other = (base.weather.WeatherForecastResponse) obj;
 
     boolean result = true;
-    result = result && getWeatherReadingsList()
-        .equals(other.getWeatherReadingsList());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getTemperature())
+        == java.lang.Double.doubleToLongBits(
+            other.getTemperature()));
+    result = result && (
+        java.lang.Double.doubleToLongBits(getHumidity())
+        == java.lang.Double.doubleToLongBits(
+            other.getHumidity()));
+    result = result && (
+        java.lang.Double.doubleToLongBits(getWindSpeed())
+        == java.lang.Double.doubleToLongBits(
+            other.getWindSpeed()));
+    result = result && (
+        java.lang.Double.doubleToLongBits(getPrecipitation())
+        == java.lang.Double.doubleToLongBits(
+            other.getPrecipitation()));
+    result = result && getTimestamp()
+        .equals(other.getTimestamp());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -181,10 +277,20 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getWeatherReadingsCount() > 0) {
-      hash = (37 * hash) + WEATHER_READINGS_FIELD_NUMBER;
-      hash = (53 * hash) + getWeatherReadingsList().hashCode();
-    }
+    hash = (37 * hash) + TEMPERATURE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getTemperature()));
+    hash = (37 * hash) + HUMIDITY_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getHumidity()));
+    hash = (37 * hash) + WIND_SPEED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getWindSpeed()));
+    hash = (37 * hash) + PRECIPITATION_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getPrecipitation()));
+    hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+    hash = (53 * hash) + getTimestamp().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -313,18 +419,21 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getWeatherReadingsFieldBuilder();
       }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      if (weatherReadingsBuilder_ == null) {
-        weatherReadings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-      } else {
-        weatherReadingsBuilder_.clear();
-      }
+      temperature_ = 0D;
+
+      humidity_ = 0D;
+
+      windSpeed_ = 0D;
+
+      precipitation_ = 0D;
+
+      timestamp_ = "";
+
       return this;
     }
 
@@ -351,16 +460,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public base.weather.WeatherForecastResponse buildPartial() {
       base.weather.WeatherForecastResponse result = new base.weather.WeatherForecastResponse(this);
-      int from_bitField0_ = bitField0_;
-      if (weatherReadingsBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          weatherReadings_ = java.util.Collections.unmodifiableList(weatherReadings_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.weatherReadings_ = weatherReadings_;
-      } else {
-        result.weatherReadings_ = weatherReadingsBuilder_.build();
-      }
+      result.temperature_ = temperature_;
+      result.humidity_ = humidity_;
+      result.windSpeed_ = windSpeed_;
+      result.precipitation_ = precipitation_;
+      result.timestamp_ = timestamp_;
       onBuilt();
       return result;
     }
@@ -409,31 +513,21 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(base.weather.WeatherForecastResponse other) {
       if (other == base.weather.WeatherForecastResponse.getDefaultInstance()) return this;
-      if (weatherReadingsBuilder_ == null) {
-        if (!other.weatherReadings_.isEmpty()) {
-          if (weatherReadings_.isEmpty()) {
-            weatherReadings_ = other.weatherReadings_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureWeatherReadingsIsMutable();
-            weatherReadings_.addAll(other.weatherReadings_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.weatherReadings_.isEmpty()) {
-          if (weatherReadingsBuilder_.isEmpty()) {
-            weatherReadingsBuilder_.dispose();
-            weatherReadingsBuilder_ = null;
-            weatherReadings_ = other.weatherReadings_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            weatherReadingsBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getWeatherReadingsFieldBuilder() : null;
-          } else {
-            weatherReadingsBuilder_.addAllMessages(other.weatherReadings_);
-          }
-        }
+      if (other.getTemperature() != 0D) {
+        setTemperature(other.getTemperature());
+      }
+      if (other.getHumidity() != 0D) {
+        setHumidity(other.getHumidity());
+      }
+      if (other.getWindSpeed() != 0D) {
+        setWindSpeed(other.getWindSpeed());
+      }
+      if (other.getPrecipitation() != 0D) {
+        setPrecipitation(other.getPrecipitation());
+      }
+      if (!other.getTimestamp().isEmpty()) {
+        timestamp_ = other.timestamp_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -463,246 +557,178 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
-    private java.util.List<base.weather.WeatherReading> weatherReadings_ =
-      java.util.Collections.emptyList();
-    private void ensureWeatherReadingsIsMutable() {
-      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-        weatherReadings_ = new java.util.ArrayList<base.weather.WeatherReading>(weatherReadings_);
-        bitField0_ |= 0x00000001;
-       }
+    private double temperature_ ;
+    /**
+     * <code>double temperature = 1;</code>
+     */
+    public double getTemperature() {
+      return temperature_;
+    }
+    /**
+     * <code>double temperature = 1;</code>
+     */
+    public Builder setTemperature(double value) {
+      
+      temperature_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double temperature = 1;</code>
+     */
+    public Builder clearTemperature() {
+      
+      temperature_ = 0D;
+      onChanged();
+      return this;
     }
 
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        base.weather.WeatherReading, base.weather.WeatherReading.Builder, base.weather.WeatherReadingOrBuilder> weatherReadingsBuilder_;
+    private double humidity_ ;
+    /**
+     * <code>double humidity = 2;</code>
+     */
+    public double getHumidity() {
+      return humidity_;
+    }
+    /**
+     * <code>double humidity = 2;</code>
+     */
+    public Builder setHumidity(double value) {
+      
+      humidity_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double humidity = 2;</code>
+     */
+    public Builder clearHumidity() {
+      
+      humidity_ = 0D;
+      onChanged();
+      return this;
+    }
 
+    private double windSpeed_ ;
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>double wind_speed = 3;</code>
      */
-    public java.util.List<base.weather.WeatherReading> getWeatherReadingsList() {
-      if (weatherReadingsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(weatherReadings_);
-      } else {
-        return weatherReadingsBuilder_.getMessageList();
-      }
+    public double getWindSpeed() {
+      return windSpeed_;
     }
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>double wind_speed = 3;</code>
      */
-    public int getWeatherReadingsCount() {
-      if (weatherReadingsBuilder_ == null) {
-        return weatherReadings_.size();
-      } else {
-        return weatherReadingsBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public base.weather.WeatherReading getWeatherReadings(int index) {
-      if (weatherReadingsBuilder_ == null) {
-        return weatherReadings_.get(index);
-      } else {
-        return weatherReadingsBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public Builder setWeatherReadings(
-        int index, base.weather.WeatherReading value) {
-      if (weatherReadingsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.set(index, value);
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.setMessage(index, value);
-      }
+    public Builder setWindSpeed(double value) {
+      
+      windSpeed_ = value;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>double wind_speed = 3;</code>
      */
-    public Builder setWeatherReadings(
-        int index, base.weather.WeatherReading.Builder builderForValue) {
-      if (weatherReadingsBuilder_ == null) {
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.setMessage(index, builderForValue.build());
-      }
+    public Builder clearWindSpeed() {
+      
+      windSpeed_ = 0D;
+      onChanged();
+      return this;
+    }
+
+    private double precipitation_ ;
+    /**
+     * <code>double precipitation = 4;</code>
+     */
+    public double getPrecipitation() {
+      return precipitation_;
+    }
+    /**
+     * <code>double precipitation = 4;</code>
+     */
+    public Builder setPrecipitation(double value) {
+      
+      precipitation_ = value;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>double precipitation = 4;</code>
      */
-    public Builder addWeatherReadings(base.weather.WeatherReading value) {
-      if (weatherReadingsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.add(value);
-        onChanged();
+    public Builder clearPrecipitation() {
+      
+      precipitation_ = 0D;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object timestamp_ = "";
+    /**
+     * <code>string timestamp = 5;</code>
+     */
+    public java.lang.String getTimestamp() {
+      java.lang.Object ref = timestamp_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        timestamp_ = s;
+        return s;
       } else {
-        weatherReadingsBuilder_.addMessage(value);
+        return (java.lang.String) ref;
       }
+    }
+    /**
+     * <code>string timestamp = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTimestampBytes() {
+      java.lang.Object ref = timestamp_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        timestamp_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string timestamp = 5;</code>
+     */
+    public Builder setTimestamp(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      timestamp_ = value;
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>string timestamp = 5;</code>
      */
-    public Builder addWeatherReadings(
-        int index, base.weather.WeatherReading value) {
-      if (weatherReadingsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.add(index, value);
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.addMessage(index, value);
-      }
+    public Builder clearTimestamp() {
+      
+      timestamp_ = getDefaultInstance().getTimestamp();
+      onChanged();
       return this;
     }
     /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+     * <code>string timestamp = 5;</code>
      */
-    public Builder addWeatherReadings(
-        base.weather.WeatherReading.Builder builderForValue) {
-      if (weatherReadingsBuilder_ == null) {
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.add(builderForValue.build());
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.addMessage(builderForValue.build());
-      }
+    public Builder setTimestampBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      timestamp_ = value;
+      onChanged();
       return this;
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public Builder addWeatherReadings(
-        int index, base.weather.WeatherReading.Builder builderForValue) {
-      if (weatherReadingsBuilder_ == null) {
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public Builder addAllWeatherReadings(
-        java.lang.Iterable<? extends base.weather.WeatherReading> values) {
-      if (weatherReadingsBuilder_ == null) {
-        ensureWeatherReadingsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, weatherReadings_);
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public Builder clearWeatherReadings() {
-      if (weatherReadingsBuilder_ == null) {
-        weatherReadings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public Builder removeWeatherReadings(int index) {
-      if (weatherReadingsBuilder_ == null) {
-        ensureWeatherReadingsIsMutable();
-        weatherReadings_.remove(index);
-        onChanged();
-      } else {
-        weatherReadingsBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public base.weather.WeatherReading.Builder getWeatherReadingsBuilder(
-        int index) {
-      return getWeatherReadingsFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public base.weather.WeatherReadingOrBuilder getWeatherReadingsOrBuilder(
-        int index) {
-      if (weatherReadingsBuilder_ == null) {
-        return weatherReadings_.get(index);  } else {
-        return weatherReadingsBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public java.util.List<? extends base.weather.WeatherReadingOrBuilder> 
-         getWeatherReadingsOrBuilderList() {
-      if (weatherReadingsBuilder_ != null) {
-        return weatherReadingsBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(weatherReadings_);
-      }
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public base.weather.WeatherReading.Builder addWeatherReadingsBuilder() {
-      return getWeatherReadingsFieldBuilder().addBuilder(
-          base.weather.WeatherReading.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public base.weather.WeatherReading.Builder addWeatherReadingsBuilder(
-        int index) {
-      return getWeatherReadingsFieldBuilder().addBuilder(
-          index, base.weather.WeatherReading.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
-     */
-    public java.util.List<base.weather.WeatherReading.Builder> 
-         getWeatherReadingsBuilderList() {
-      return getWeatherReadingsFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        base.weather.WeatherReading, base.weather.WeatherReading.Builder, base.weather.WeatherReadingOrBuilder> 
-        getWeatherReadingsFieldBuilder() {
-      if (weatherReadingsBuilder_ == null) {
-        weatherReadingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            base.weather.WeatherReading, base.weather.WeatherReading.Builder, base.weather.WeatherReadingOrBuilder>(
-                weatherReadings_,
-                ((bitField0_ & 0x00000001) == 0x00000001),
-                getParentForChildren(),
-                isClean());
-        weatherReadings_ = null;
-      }
-      return weatherReadingsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

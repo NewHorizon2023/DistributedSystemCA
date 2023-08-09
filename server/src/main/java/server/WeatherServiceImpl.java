@@ -1,10 +1,11 @@
 package server;
 
-
 import java.io.IOException;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import util.DataUtil;
+import base.weather.WeatherForecastResponse;
 import base.weather.WeatherGrpc.WeatherImplBase;
 
 public class WeatherServiceImpl extends WeatherImplBase {
@@ -23,32 +24,27 @@ public class WeatherServiceImpl extends WeatherImplBase {
 
 	/**
 	 * <pre>
-	 * RPC Method 1: GetTemperature
+	 * RPC Method: GetWeatherForecast
 	 * </pre>
 	 */
-	public void getTemperature(base.weather.WeatherLocation request,
-			io.grpc.stub.StreamObserver<base.weather.TemperatureResponse> responseObserver) {
-		// asyncUnimplementedUnaryCall(getGetTemperatureMethod(), responseObserver);
-	}
-
-	/**
-	 * <pre>
-	 * RPC Method 2: GetHumidity
-	 * </pre>
-	 */
-	public void getHumidity(base.weather.WeatherLocation request,
-			io.grpc.stub.StreamObserver<base.weather.HumidityResponse> responseObserver) {
-		// asyncUnimplementedUnaryCall(getGetHumidityMethod(), responseObserver);
-	}
-
-	/**
-	 * <pre>
-	 * RPC Method 3: GetWeatherForecast
-	 * </pre>
-	 */
+	@Override
 	public void getWeatherForecast(base.weather.WeatherForecastRequest request,
 			io.grpc.stub.StreamObserver<base.weather.WeatherForecastResponse> responseObserver) {
-		// asyncUnimplementedUnaryCall(getGetWeatherForecastMethod(), responseObserver);
+
+		double latitude = request.getLatitude();
+		double longitude = request.getLongitude();
+
+		WeatherForecastResponse.Builder builder = WeatherForecastResponse.newBuilder();
+
+		// Create weather data.
+		builder.setTemperature(DataUtil.getRandomDoubleInRange(-10, 30));
+		builder.setHumidity(DataUtil.getRandomDoubleInRange(0.3, 0.6));
+		builder.setWindSpeed(Math.round(DataUtil.getRandomDoubleInRange(0, 10)));
+		builder.setPrecipitation(Math.round(DataUtil.getRandomDoubleInRange(0, 4)));
+
+		WeatherForecastResponse response = builder.build();
+		responseObserver.onNext(response);
+		responseObserver.onCompleted();
 	}
 
 }

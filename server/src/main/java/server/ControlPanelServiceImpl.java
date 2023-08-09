@@ -33,8 +33,8 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 
 		String deviceId = request.getDeviceId();
-		System.out.println("device id is: " + deviceId);
-		System.out.println("device status is: " + request.getStatus());
+//		System.out.println("device id is: " + deviceId);
+//		System.out.println("device status is: " + request.getStatus());
 		DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
 
 		builder.setDeviceId("nci-001");
@@ -51,6 +51,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	 * RPC Method 2: GetDeviceStatus
 	 * </pre>
 	 */
+	@Override
 	public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> getDeviceStatus(
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 		return new StreamObserver<DeviceIdentifier>() {

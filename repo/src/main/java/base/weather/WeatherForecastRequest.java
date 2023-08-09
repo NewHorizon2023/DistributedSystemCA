@@ -18,8 +18,6 @@ private static final long serialVersionUID = 0L;
   private WeatherForecastRequest() {
     latitude_ = 0D;
     longitude_ = 0D;
-    startDate_ = "";
-    endDate_ = "";
   }
 
   @java.lang.Override
@@ -54,18 +52,6 @@ private static final long serialVersionUID = 0L;
           case 17: {
 
             longitude_ = input.readDouble();
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            startDate_ = s;
-            break;
-          }
-          case 34: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            endDate_ = s;
             break;
           }
           default: {
@@ -118,74 +104,6 @@ private static final long serialVersionUID = 0L;
     return longitude_;
   }
 
-  public static final int START_DATE_FIELD_NUMBER = 3;
-  private volatile java.lang.Object startDate_;
-  /**
-   * <code>string start_date = 3;</code>
-   */
-  public java.lang.String getStartDate() {
-    java.lang.Object ref = startDate_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      startDate_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string start_date = 3;</code>
-   */
-  public com.google.protobuf.ByteString
-      getStartDateBytes() {
-    java.lang.Object ref = startDate_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      startDate_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int END_DATE_FIELD_NUMBER = 4;
-  private volatile java.lang.Object endDate_;
-  /**
-   * <code>string end_date = 4;</code>
-   */
-  public java.lang.String getEndDate() {
-    java.lang.Object ref = endDate_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      endDate_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string end_date = 4;</code>
-   */
-  public com.google.protobuf.ByteString
-      getEndDateBytes() {
-    java.lang.Object ref = endDate_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      endDate_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -206,12 +124,6 @@ private static final long serialVersionUID = 0L;
     if (longitude_ != 0D) {
       output.writeDouble(2, longitude_);
     }
-    if (!getStartDateBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, startDate_);
-    }
-    if (!getEndDateBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, endDate_);
-    }
     unknownFields.writeTo(output);
   }
 
@@ -228,12 +140,6 @@ private static final long serialVersionUID = 0L;
     if (longitude_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
         .computeDoubleSize(2, longitude_);
-    }
-    if (!getStartDateBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, startDate_);
-    }
-    if (!getEndDateBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, endDate_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -259,10 +165,6 @@ private static final long serialVersionUID = 0L;
         java.lang.Double.doubleToLongBits(getLongitude())
         == java.lang.Double.doubleToLongBits(
             other.getLongitude()));
-    result = result && getStartDate()
-        .equals(other.getStartDate());
-    result = result && getEndDate()
-        .equals(other.getEndDate());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -280,10 +182,6 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + LONGITUDE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         java.lang.Double.doubleToLongBits(getLongitude()));
-    hash = (37 * hash) + START_DATE_FIELD_NUMBER;
-    hash = (53 * hash) + getStartDate().hashCode();
-    hash = (37 * hash) + END_DATE_FIELD_NUMBER;
-    hash = (53 * hash) + getEndDate().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -421,10 +319,6 @@ private static final long serialVersionUID = 0L;
 
       longitude_ = 0D;
 
-      startDate_ = "";
-
-      endDate_ = "";
-
       return this;
     }
 
@@ -453,8 +347,6 @@ private static final long serialVersionUID = 0L;
       base.weather.WeatherForecastRequest result = new base.weather.WeatherForecastRequest(this);
       result.latitude_ = latitude_;
       result.longitude_ = longitude_;
-      result.startDate_ = startDate_;
-      result.endDate_ = endDate_;
       onBuilt();
       return result;
     }
@@ -508,14 +400,6 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getLongitude() != 0D) {
         setLongitude(other.getLongitude());
-      }
-      if (!other.getStartDate().isEmpty()) {
-        startDate_ = other.startDate_;
-        onChanged();
-      }
-      if (!other.getEndDate().isEmpty()) {
-        endDate_ = other.endDate_;
-        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -594,144 +478,6 @@ private static final long serialVersionUID = 0L;
     public Builder clearLongitude() {
       
       longitude_ = 0D;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object startDate_ = "";
-    /**
-     * <code>string start_date = 3;</code>
-     */
-    public java.lang.String getStartDate() {
-      java.lang.Object ref = startDate_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        startDate_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string start_date = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getStartDateBytes() {
-      java.lang.Object ref = startDate_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        startDate_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string start_date = 3;</code>
-     */
-    public Builder setStartDate(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      startDate_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string start_date = 3;</code>
-     */
-    public Builder clearStartDate() {
-      
-      startDate_ = getDefaultInstance().getStartDate();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string start_date = 3;</code>
-     */
-    public Builder setStartDateBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      startDate_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object endDate_ = "";
-    /**
-     * <code>string end_date = 4;</code>
-     */
-    public java.lang.String getEndDate() {
-      java.lang.Object ref = endDate_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        endDate_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string end_date = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getEndDateBytes() {
-      java.lang.Object ref = endDate_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        endDate_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string end_date = 4;</code>
-     */
-    public Builder setEndDate(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      endDate_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string end_date = 4;</code>
-     */
-    public Builder clearEndDate() {
-      
-      endDate_ = getDefaultInstance().getEndDate();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string end_date = 4;</code>
-     */
-    public Builder setEndDateBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      endDate_ = value;
       onChanged();
       return this;
     }

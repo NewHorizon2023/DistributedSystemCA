@@ -51,17 +51,14 @@ public final class PollutionSensorImpl {
       "e\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001\022\022\n\nstart_date" +
       "\030\003 \001(\t\022\020\n\010end_date\030\004 \001(\t\"Y\n\030PollutionHis" +
       "toryResponse\022=\n\022pollution_readings\030\001 \003(\013" +
-      "2!.PollutionSensor.PollutionReading2\307\002\n\017" +
-      "PollutionSensor\022\\\n\021GetPollutionLevel\022\".P" +
+      "2!.PollutionSensor.PollutionReading2\337\001\n\017" +
+      "PollutionSensor\022^\n\021GetPollutionLevel\022\".P" +
       "ollutionSensor.PollutionLocation\032!.Pollu" +
-      "tionSensor.PollutionReading\"\000\022h\n\033Subscri" +
-      "beToPollutionUpdates\022\".PollutionSensor.P" +
-      "ollutionLocation\032!.PollutionSensor.Pollu" +
-      "tionReading\"\0000\001\022l\n\023GetPollutionHistory\022(" +
-      ".PollutionSensor.PollutionHistoryRequest" +
-      "\032).PollutionSensor.PollutionHistoryRespo" +
-      "nse\"\000B-\n\024base.pollutionSensorB\023Pollution" +
-      "SensorImplP\001b\006proto3"
+      "tionSensor.PollutionReading\"\0000\001\022l\n\023GetPo" +
+      "llutionHistory\022(.PollutionSensor.Polluti" +
+      "onHistoryRequest\032).PollutionSensor.Pollu" +
+      "tionHistoryResponse\"\000B-\n\024base.pollutionS" +
+      "ensorB\023PollutionSensorImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

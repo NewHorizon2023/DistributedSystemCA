@@ -16,24 +16,4 @@ public interface WeatherForecastRequestOrBuilder extends
    * <code>double longitude = 2;</code>
    */
   double getLongitude();
-
-  /**
-   * <code>string start_date = 3;</code>
-   */
-  java.lang.String getStartDate();
-  /**
-   * <code>string start_date = 3;</code>
-   */
-  com.google.protobuf.ByteString
-      getStartDateBytes();
-
-  /**
-   * <code>string end_date = 4;</code>
-   */
-  java.lang.String getEndDate();
-  /**
-   * <code>string end_date = 4;</code>
-   */
-  com.google.protobuf.ByteString
-      getEndDateBytes();
 }

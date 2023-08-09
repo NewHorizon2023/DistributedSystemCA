@@ -30,70 +30,6 @@ public final class WeatherGrpc {
   public static final String SERVICE_NAME = "Weather.Weather";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<base.weather.WeatherLocation,
-      base.weather.TemperatureResponse> getGetTemperatureMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetTemperature",
-      requestType = base.weather.WeatherLocation.class,
-      responseType = base.weather.TemperatureResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<base.weather.WeatherLocation,
-      base.weather.TemperatureResponse> getGetTemperatureMethod() {
-    io.grpc.MethodDescriptor<base.weather.WeatherLocation, base.weather.TemperatureResponse> getGetTemperatureMethod;
-    if ((getGetTemperatureMethod = WeatherGrpc.getGetTemperatureMethod) == null) {
-      synchronized (WeatherGrpc.class) {
-        if ((getGetTemperatureMethod = WeatherGrpc.getGetTemperatureMethod) == null) {
-          WeatherGrpc.getGetTemperatureMethod = getGetTemperatureMethod = 
-              io.grpc.MethodDescriptor.<base.weather.WeatherLocation, base.weather.TemperatureResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "Weather.Weather", "GetTemperature"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.weather.WeatherLocation.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.weather.TemperatureResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new WeatherMethodDescriptorSupplier("GetTemperature"))
-                  .build();
-          }
-        }
-     }
-     return getGetTemperatureMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<base.weather.WeatherLocation,
-      base.weather.HumidityResponse> getGetHumidityMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetHumidity",
-      requestType = base.weather.WeatherLocation.class,
-      responseType = base.weather.HumidityResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<base.weather.WeatherLocation,
-      base.weather.HumidityResponse> getGetHumidityMethod() {
-    io.grpc.MethodDescriptor<base.weather.WeatherLocation, base.weather.HumidityResponse> getGetHumidityMethod;
-    if ((getGetHumidityMethod = WeatherGrpc.getGetHumidityMethod) == null) {
-      synchronized (WeatherGrpc.class) {
-        if ((getGetHumidityMethod = WeatherGrpc.getGetHumidityMethod) == null) {
-          WeatherGrpc.getGetHumidityMethod = getGetHumidityMethod = 
-              io.grpc.MethodDescriptor.<base.weather.WeatherLocation, base.weather.HumidityResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "Weather.Weather", "GetHumidity"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.weather.WeatherLocation.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  base.weather.HumidityResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new WeatherMethodDescriptorSupplier("GetHumidity"))
-                  .build();
-          }
-        }
-     }
-     return getGetHumidityMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<base.weather.WeatherForecastRequest,
       base.weather.WeatherForecastResponse> getGetWeatherForecastMethod;
 
@@ -158,27 +94,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * Unary RPC Method 1: GetTemperature
-     * </pre>
-     */
-    public void getTemperature(base.weather.WeatherLocation request,
-        io.grpc.stub.StreamObserver<base.weather.TemperatureResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetTemperatureMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 2: GetHumidity
-     * </pre>
-     */
-    public void getHumidity(base.weather.WeatherLocation request,
-        io.grpc.stub.StreamObserver<base.weather.HumidityResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetHumidityMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetWeatherForecast
+     * Unary RPC Method: GetWeatherForecast
      * </pre>
      */
     public void getWeatherForecast(base.weather.WeatherForecastRequest request,
@@ -188,20 +104,6 @@ public final class WeatherGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getGetTemperatureMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                base.weather.WeatherLocation,
-                base.weather.TemperatureResponse>(
-                  this, METHODID_GET_TEMPERATURE)))
-          .addMethod(
-            getGetHumidityMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                base.weather.WeatherLocation,
-                base.weather.HumidityResponse>(
-                  this, METHODID_GET_HUMIDITY)))
           .addMethod(
             getGetWeatherForecastMethod(),
             asyncUnaryCall(
@@ -236,29 +138,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * Unary RPC Method 1: GetTemperature
-     * </pre>
-     */
-    public void getTemperature(base.weather.WeatherLocation request,
-        io.grpc.stub.StreamObserver<base.weather.TemperatureResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetTemperatureMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 2: GetHumidity
-     * </pre>
-     */
-    public void getHumidity(base.weather.WeatherLocation request,
-        io.grpc.stub.StreamObserver<base.weather.HumidityResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetHumidityMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetWeatherForecast
+     * Unary RPC Method: GetWeatherForecast
      * </pre>
      */
     public void getWeatherForecast(base.weather.WeatherForecastRequest request,
@@ -291,27 +171,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * Unary RPC Method 1: GetTemperature
-     * </pre>
-     */
-    public base.weather.TemperatureResponse getTemperature(base.weather.WeatherLocation request) {
-      return blockingUnaryCall(
-          getChannel(), getGetTemperatureMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 2: GetHumidity
-     * </pre>
-     */
-    public base.weather.HumidityResponse getHumidity(base.weather.WeatherLocation request) {
-      return blockingUnaryCall(
-          getChannel(), getGetHumidityMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetWeatherForecast
+     * Unary RPC Method: GetWeatherForecast
      * </pre>
      */
     public base.weather.WeatherForecastResponse getWeatherForecast(base.weather.WeatherForecastRequest request) {
@@ -343,29 +203,7 @@ public final class WeatherGrpc {
 
     /**
      * <pre>
-     * Unary RPC Method 1: GetTemperature
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<base.weather.TemperatureResponse> getTemperature(
-        base.weather.WeatherLocation request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetTemperatureMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 2: GetHumidity
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<base.weather.HumidityResponse> getHumidity(
-        base.weather.WeatherLocation request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetHumidityMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * Unary RPC Method 3: GetWeatherForecast
+     * Unary RPC Method: GetWeatherForecast
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<base.weather.WeatherForecastResponse> getWeatherForecast(
@@ -375,9 +213,7 @@ public final class WeatherGrpc {
     }
   }
 
-  private static final int METHODID_GET_TEMPERATURE = 0;
-  private static final int METHODID_GET_HUMIDITY = 1;
-  private static final int METHODID_GET_WEATHER_FORECAST = 2;
+  private static final int METHODID_GET_WEATHER_FORECAST = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -396,14 +232,6 @@ public final class WeatherGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_TEMPERATURE:
-          serviceImpl.getTemperature((base.weather.WeatherLocation) request,
-              (io.grpc.stub.StreamObserver<base.weather.TemperatureResponse>) responseObserver);
-          break;
-        case METHODID_GET_HUMIDITY:
-          serviceImpl.getHumidity((base.weather.WeatherLocation) request,
-              (io.grpc.stub.StreamObserver<base.weather.HumidityResponse>) responseObserver);
-          break;
         case METHODID_GET_WEATHER_FORECAST:
           serviceImpl.getWeatherForecast((base.weather.WeatherForecastRequest) request,
               (io.grpc.stub.StreamObserver<base.weather.WeatherForecastResponse>) responseObserver);
@@ -469,8 +297,6 @@ public final class WeatherGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new WeatherFileDescriptorSupplier())
-              .addMethod(getGetTemperatureMethod())
-              .addMethod(getGetHumidityMethod())
               .addMethod(getGetWeatherForecastMethod())
               .build();
         }

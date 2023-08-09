@@ -8,26 +8,32 @@ public interface WeatherForecastResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>double temperature = 1;</code>
    */
-  java.util.List<base.weather.WeatherReading> 
-      getWeatherReadingsList();
+  double getTemperature();
+
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>double humidity = 2;</code>
    */
-  base.weather.WeatherReading getWeatherReadings(int index);
+  double getHumidity();
+
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>double wind_speed = 3;</code>
    */
-  int getWeatherReadingsCount();
+  double getWindSpeed();
+
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>double precipitation = 4;</code>
    */
-  java.util.List<? extends base.weather.WeatherReadingOrBuilder> 
-      getWeatherReadingsOrBuilderList();
+  double getPrecipitation();
+
   /**
-   * <code>repeated .Weather.WeatherReading weather_readings = 1;</code>
+   * <code>string timestamp = 5;</code>
    */
-  base.weather.WeatherReadingOrBuilder getWeatherReadingsOrBuilder(
-      int index);
+  java.lang.String getTimestamp();
+  /**
+   * <code>string timestamp = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getTimestampBytes();
 }

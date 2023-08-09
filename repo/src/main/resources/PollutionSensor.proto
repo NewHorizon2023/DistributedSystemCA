@@ -11,7 +11,7 @@ service PollutionSensor {
     // Unary RPC Method: GetPollutionLevel
     rpc GetPollutionLevel (PollutionLocation) returns (stream PollutionReading) {}
 
-    // Unary RPC Method 3: GetPollutionHistory
+    // Unary RPC Method: GetPollutionHistory
     rpc GetPollutionHistory (PollutionHistoryRequest) returns (PollutionHistoryResponse) {}
 }
 

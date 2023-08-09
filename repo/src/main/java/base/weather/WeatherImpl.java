@@ -15,21 +15,6 @@ public final class WeatherImpl {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Weather_WeatherLocation_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Weather_WeatherLocation_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Weather_TemperatureResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Weather_TemperatureResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Weather_HumidityResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Weather_HumidityResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Weather_WeatherForecastRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -39,11 +24,6 @@ public final class WeatherImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Weather_WeatherForecastResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Weather_WeatherReading_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Weather_WeatherReading_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -53,25 +33,15 @@ public final class WeatherImpl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rWeather.proto\022\007Weather\"6\n\017WeatherLocat" +
-      "ion\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001" +
-      "\"*\n\023TemperatureResponse\022\023\n\013temperature\030\001" +
-      " \001(\001\"$\n\020HumidityResponse\022\020\n\010humidity\030\001 \001" +
-      "(\001\"c\n\026WeatherForecastRequest\022\020\n\010latitude" +
-      "\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001\022\022\n\nstart_date\030" +
-      "\003 \001(\t\022\020\n\010end_date\030\004 \001(\t\"L\n\027WeatherForeca" +
-      "stResponse\0221\n\020weather_readings\030\001 \003(\0132\027.W" +
-      "eather.WeatherReading\"u\n\016WeatherReading\022" +
-      "\023\n\013temperature\030\001 \001(\001\022\020\n\010humidity\030\002 \001(\001\022\022" +
-      "\n\nwind_speed\030\003 \001(\001\022\025\n\rprecipitation\030\004 \001(" +
-      "\001\022\021\n\ttimestamp\030\005 \001(\t2\366\001\n\007Weather\022J\n\016GetT" +
-      "emperature\022\030.Weather.WeatherLocation\032\034.W" +
-      "eather.TemperatureResponse\"\000\022D\n\013GetHumid" +
-      "ity\022\030.Weather.WeatherLocation\032\031.Weather." +
-      "HumidityResponse\"\000\022Y\n\022GetWeatherForecast" +
-      "\022\037.Weather.WeatherForecastRequest\032 .Weat" +
-      "her.WeatherForecastResponse\"\000B\035\n\014base.we" +
-      "atherB\013WeatherImplP\001b\006proto3"
+      "\n\rWeather.proto\022\007Weather\"=\n\026WeatherForec" +
+      "astRequest\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitud" +
+      "e\030\002 \001(\001\"~\n\027WeatherForecastResponse\022\023\n\013te" +
+      "mperature\030\001 \001(\001\022\020\n\010humidity\030\002 \001(\001\022\022\n\nwin" +
+      "d_speed\030\003 \001(\001\022\025\n\rprecipitation\030\004 \001(\001\022\021\n\t" +
+      "timestamp\030\005 \001(\t2d\n\007Weather\022Y\n\022GetWeather" +
+      "Forecast\022\037.Weather.WeatherForecastReques" +
+      "t\032 .Weather.WeatherForecastResponse\"\000B\035\n" +
+      "\014base.weatherB\013WeatherImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -85,41 +55,17 @@ public final class WeatherImpl {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_Weather_WeatherLocation_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_Weather_WeatherLocation_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Weather_WeatherLocation_descriptor,
-        new java.lang.String[] { "Latitude", "Longitude", });
-    internal_static_Weather_TemperatureResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_Weather_TemperatureResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Weather_TemperatureResponse_descriptor,
-        new java.lang.String[] { "Temperature", });
-    internal_static_Weather_HumidityResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_Weather_HumidityResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Weather_HumidityResponse_descriptor,
-        new java.lang.String[] { "Humidity", });
     internal_static_Weather_WeatherForecastRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_Weather_WeatherForecastRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Weather_WeatherForecastRequest_descriptor,
-        new java.lang.String[] { "Latitude", "Longitude", "StartDate", "EndDate", });
+        new java.lang.String[] { "Latitude", "Longitude", });
     internal_static_Weather_WeatherForecastResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_Weather_WeatherForecastResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Weather_WeatherForecastResponse_descriptor,
-        new java.lang.String[] { "WeatherReadings", });
-    internal_static_Weather_WeatherReading_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_Weather_WeatherReading_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Weather_WeatherReading_descriptor,
         new java.lang.String[] { "Temperature", "Humidity", "WindSpeed", "Precipitation", "Timestamp", });
   }
 

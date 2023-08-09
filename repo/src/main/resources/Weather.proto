@@ -8,7 +8,7 @@ package Weather;
 
 // Service 2: WeatherService
 service Weather {
-    // Unary RPC Method 3: GetWeatherForecast
+    // Unary RPC Method: GetWeatherForecast
     rpc GetWeatherForecast (WeatherForecastRequest) returns (WeatherForecastResponse) {}
 }
 
@@ -18,10 +18,12 @@ message WeatherForecastRequest {
 }
 
 message WeatherForecastResponse {
-    double temperature = 1;
-    double humidity = 2;
-    double wind_speed = 3;
-    double precipitation = 4;
-    string timestamp = 5;
+	double latitude = 1;
+    double longitude = 2;
+    double temperature = 3;
+    double humidity = 4;
+    double wind_speed = 5;
+    double precipitation = 6;
+    string timestamp = 7;
 }
 

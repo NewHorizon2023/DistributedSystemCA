@@ -44,6 +44,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 * RPC Method 1: GetPollutionLevel
 	 * </pre>
 	 */
+	@Override
 	public void getPollutionLevel(base.pollutionSensor.PollutionLocation request,
 			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
 
@@ -80,44 +81,13 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	}
 
 	/**
-	 * @Deprecated
-	 * 
-	 *             <pre>
-	 * RPC Method 2: SubscribeToPollutionUpdates
-	 *             </pre>
-	 */
-	public void subscribeToPollutionUpdates(base.pollutionSensor.PollutionLocation request,
-			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionReading> responseObserver) {
-
-		// TODO Response data through stream
-		while (deviceStatus) {
-
-			PollutionReading.Builder builder = PollutionReading.newBuilder();
-			// Set pollution level
-			builder.setPollutionLevel(getPollutionLevel());
-			// Set timestamp
-			builder.setTimestamp(TimeUtil.getTimeNow());
-			PollutionReading response = builder.build();
-			responseObserver.onNext(response);
-
-			try {
-				// Give a 1 second gap to response
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				e.getStackTrace();
-			}
-		}
-		// Response completed.
-		responseObserver.onCompleted();
-	}
-
-	/**
 	 * Get pollution history data by conditons.
 	 * 
 	 * <pre>
-	 * RPC Method 3: GetPollutionHistory
+	 * RPC Method 2: GetPollutionHistory
 	 * </pre>
 	 */
+	@Override
 	public void getPollutionHistory(base.pollutionSensor.PollutionHistoryRequest request,
 			io.grpc.stub.StreamObserver<base.pollutionSensor.PollutionHistoryResponse> responseObserver) {
 
