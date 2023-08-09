@@ -9,10 +9,7 @@ package PollutionSensor;
 // Service 1: PollutionSensorService
 service PollutionSensor {
     // Unary RPC Method: GetPollutionLevel
-    rpc GetPollutionLevel (PollutionLocation) returns (PollutionReading) {}
-
-    // Server Streaming RPC Method: SubscribeToPollutionUpdates
-    rpc SubscribeToPollutionUpdates (PollutionLocation) returns (stream PollutionReading) {}
+    rpc GetPollutionLevel (PollutionLocation) returns (stream PollutionReading) {}
 
     // Unary RPC Method 3: GetPollutionHistory
     rpc GetPollutionHistory (PollutionHistoryRequest) returns (PollutionHistoryResponse) {}
