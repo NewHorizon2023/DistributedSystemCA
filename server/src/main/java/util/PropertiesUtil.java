@@ -14,6 +14,9 @@ public class PropertiesUtil {
 
 	public static final String USERNAME_STRING = "user.username";
 	public static final String PASSWORD_STRING = "user.password";
+	
+	public static final String TOKEN_SECRET_KEY = "token.secret";
+	public static final String TOMEN_EXPIRATION_TIME = "token.expiration";
 
 	private static final String PROPERTIES_FILE = "config.properties";
 	private static Properties properties;
