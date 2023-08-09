@@ -17,7 +17,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
- * Service 2: WeatherService
+ * Service : WeatherService
  * </pre>
  */
 @javax.annotation.Generated(
@@ -87,7 +87,7 @@ public final class WeatherGrpc {
 
   /**
    * <pre>
-   * Service 2: WeatherService
+   * Service : WeatherService
    * </pre>
    */
   public static abstract class WeatherImplBase implements io.grpc.BindableService {
@@ -117,7 +117,7 @@ public final class WeatherGrpc {
 
   /**
    * <pre>
-   * Service 2: WeatherService
+   * Service : WeatherService
    * </pre>
    */
   public static final class WeatherStub extends io.grpc.stub.AbstractStub<WeatherStub> {
@@ -150,7 +150,7 @@ public final class WeatherGrpc {
 
   /**
    * <pre>
-   * Service 2: WeatherService
+   * Service : WeatherService
    * </pre>
    */
   public static final class WeatherBlockingStub extends io.grpc.stub.AbstractStub<WeatherBlockingStub> {
@@ -182,7 +182,7 @@ public final class WeatherGrpc {
 
   /**
    * <pre>
-   * Service 2: WeatherService
+   * Service : WeatherService
    * </pre>
    */
   public static final class WeatherFutureStub extends io.grpc.stub.AbstractStub<WeatherFutureStub> {

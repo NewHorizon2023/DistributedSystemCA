@@ -6,7 +6,7 @@ option java_outer_classname = "WeatherImpl";
 
 package Weather;
 
-// Service 2: WeatherService
+// Service : WeatherService
 service Weather {
     // Unary RPC Method: GetWeatherForecast
     rpc GetWeatherForecast (WeatherForecastRequest) returns (WeatherForecastResponse) {}
