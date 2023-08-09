@@ -32,29 +32,6 @@ public class ControlPanelClient {
 		}
 	}
 
-//	public static void getDeviceStatusInvoke() {
-//		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-//		try {
-//			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
-//					.newBlockingStub(channel);
-//			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
-//			builder.setDeviceId("11111");
-//			DeviceIdentifier request = builder.build();
-//			Iterator<base.controlPanel.DeviceStatusResponse> responseIterator = controlPanelBlockingStub
-//					.getDeviceStatus(request);
-//			while (responseIterator.hasNext()) {
-//				DeviceStatusResponse next = responseIterator.next();
-//				System.out.println("Response- device id is: " + next.getDeviceId());
-//				System.out.println("Response- device status is: " + next.getStatus());
-//			}
-//
-//		} catch (Exception e) {
-//			e.getStackTrace();
-//		} finally {
-//			channel.shutdown();
-//		}
-//	}
-
 	public static void getDeviceStatusInvoke() {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 		try {

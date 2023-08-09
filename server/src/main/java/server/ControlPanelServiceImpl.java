@@ -44,37 +44,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 		responseObserver.onNext(response);
 		responseObserver.onCompleted();
 
-		// asyncUnimplementedUnaryCall(getSetDeviceStatusMethod(), responseObserver);
-
 	}
-
-//	/**
-//	 * <pre>
-//	 * RPC Method 2: GetDeviceStatus
-//	 * </pre>
-//	 */
-//	@Override
-//	public void getDeviceStatus(base.controlPanel.DeviceIdentifier request,
-//			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
-//		// System.out.println("Request device id is: " + deviceId);
-//		for (int i = 0; i < 5; i++) {
-//			base.controlPanel.DeviceStatusResponse.Builder builder = base.controlPanel.DeviceStatusResponse
-//					.newBuilder();
-//			builder.setDeviceId(Integer.toString(i));
-//			builder.setStatus(false);
-//			base.controlPanel.DeviceStatusResponse build = builder.build();
-//			responseObserver.onNext(build);
-//			System.out.println("server device id is: " + i);
-//			try {
-//				Thread.sleep(5000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		responseObserver.onCompleted();
-//
-//	}
 
 	/**
 	 * <pre>
