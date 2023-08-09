@@ -35,6 +35,7 @@ public class PollutionSensorClient {
 				// TODO show these data on gui.
 				double pollutionLevel = pollution.getPollutionLevel();
 				String timestamp = pollution.getTimestamp();
+				System.out.println("pollution level: " + pollutionLevel + "time: " + timestamp);
 			}
 
 		} catch (Exception e) {
@@ -63,12 +64,17 @@ public class PollutionSensorClient {
 			PollutionHistoryResponse response = service.getPollutionHistory(request);
 			// TODO show data on gui
 			List<PollutionReading> pollutionReadingList = response.getPollutionReadingsList();
+			System.out.println("pollution list size is: " + pollutionReadingList.size());
 
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
 			channel.shutdown();
 		}
+	}
 
+	public static void main(String[] args) {
+//		getPollutionLevelInvoke(1, 2);
+		getPollutionHistoryInvoke(1, 2, "2023-08-09 20:00:00", "2023-08-09 21:00:00");
 	}
 }

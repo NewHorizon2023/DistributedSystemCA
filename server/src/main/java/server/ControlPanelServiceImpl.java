@@ -26,7 +26,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	/**
 	 * The status of sencor device which works normally only when it is "true".
 	 */
-	public static boolean deviceStatus;
+	public static boolean deviceStatus = true;
 
 	/**
 	 * <pre>

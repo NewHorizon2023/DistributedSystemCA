@@ -19,7 +19,7 @@ public class WeatherServiceImpl extends WeatherImplBase {
 	public static void main(String[] args) throws InterruptedException, IOException {
 //		WeatherServiceImpl weatherServiceImpl = new WeatherServiceImpl();
 //
-//		int port = 50053;
+//		int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_3));
 //
 //		Server server = ServerBuilder.forPort(port).addService(weatherServiceImpl).build().start();
 //
@@ -53,8 +53,8 @@ public class WeatherServiceImpl extends WeatherImplBase {
 			server.awaitTermination();
 
 			// Unregister the service before exiting
-			jmdns.unregisterAllServices();
-			jmdns.close();
+//			jmdns.unregisterAllServices();
+//			jmdns.close();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
