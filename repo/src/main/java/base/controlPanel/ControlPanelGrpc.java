@@ -69,7 +69,7 @@ public final class ControlPanelGrpc {
       fullMethodName = SERVICE_NAME + '/' + "GetDeviceStatus",
       requestType = base.controlPanel.DeviceIdentifier.class,
       responseType = base.controlPanel.DeviceStatusResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
   public static io.grpc.MethodDescriptor<base.controlPanel.DeviceIdentifier,
       base.controlPanel.DeviceStatusResponse> getGetDeviceStatusMethod() {
     io.grpc.MethodDescriptor<base.controlPanel.DeviceIdentifier, base.controlPanel.DeviceStatusResponse> getGetDeviceStatusMethod;
@@ -78,7 +78,7 @@ public final class ControlPanelGrpc {
         if ((getGetDeviceStatusMethod = ControlPanelGrpc.getGetDeviceStatusMethod) == null) {
           ControlPanelGrpc.getGetDeviceStatusMethod = getGetDeviceStatusMethod = 
               io.grpc.MethodDescriptor.<base.controlPanel.DeviceIdentifier, base.controlPanel.DeviceStatusResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "ControlPanel.ControlPanel", "GetDeviceStatus"))
               .setSampledToLocalTracing(true)
@@ -171,9 +171,9 @@ public final class ControlPanelGrpc {
      * RPC Method 2: GetDeviceStatus
      * </pre>
      */
-    public void getDeviceStatus(base.controlPanel.DeviceIdentifier request,
+    public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> getDeviceStatus(
         io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetDeviceStatusMethod(), responseObserver);
+      return asyncUnimplementedStreamingCall(getGetDeviceStatusMethod(), responseObserver);
     }
 
     /**
@@ -197,7 +197,7 @@ public final class ControlPanelGrpc {
                   this, METHODID_SET_DEVICE_STATUS)))
           .addMethod(
             getGetDeviceStatusMethod(),
-            asyncServerStreamingCall(
+            asyncClientStreamingCall(
               new MethodHandlers<
                 base.controlPanel.DeviceIdentifier,
                 base.controlPanel.DeviceStatusResponse>(
@@ -250,10 +250,10 @@ public final class ControlPanelGrpc {
      * RPC Method 2: GetDeviceStatus
      * </pre>
      */
-    public void getDeviceStatus(base.controlPanel.DeviceIdentifier request,
+    public io.grpc.stub.StreamObserver<base.controlPanel.DeviceIdentifier> getDeviceStatus(
         io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(getGetDeviceStatusMethod(), getCallOptions()), request, responseObserver);
+      return asyncClientStreamingCall(
+          getChannel().newCall(getGetDeviceStatusMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -297,17 +297,6 @@ public final class ControlPanelGrpc {
     public base.controlPanel.DeviceStatusResponse setDeviceStatus(base.controlPanel.DeviceStatusRequest request) {
       return blockingUnaryCall(
           getChannel(), getSetDeviceStatusMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * RPC Method 2: GetDeviceStatus
-     * </pre>
-     */
-    public java.util.Iterator<base.controlPanel.DeviceStatusResponse> getDeviceStatus(
-        base.controlPanel.DeviceIdentifier request) {
-      return blockingServerStreamingCall(
-          getChannel(), getGetDeviceStatusMethod(), getCallOptions(), request);
     }
   }
 
@@ -369,10 +358,6 @@ public final class ControlPanelGrpc {
           serviceImpl.setDeviceStatus((base.controlPanel.DeviceStatusRequest) request,
               (io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse>) responseObserver);
           break;
-        case METHODID_GET_DEVICE_STATUS:
-          serviceImpl.getDeviceStatus((base.controlPanel.DeviceIdentifier) request,
-              (io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -383,6 +368,9 @@ public final class ControlPanelGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_DEVICE_STATUS:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getDeviceStatus(
+              (io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse>) responseObserver);
         case METHODID_STREAM_DEVICE_LOGS:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.streamDeviceLogs(
               (io.grpc.stub.StreamObserver<base.controlPanel.DeviceLog>) responseObserver);

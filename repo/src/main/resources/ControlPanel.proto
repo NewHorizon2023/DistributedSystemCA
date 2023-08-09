@@ -8,13 +8,13 @@ package ControlPanel;
 
 // Service 3: ControlPanelService
 service ControlPanel {
-    // RPC Method 1: SetDeviceStatus
+    // Unary RPC Method: SetDeviceStatus
     rpc SetDeviceStatus (DeviceStatusRequest) returns (DeviceStatusResponse) {}
 
-    // RPC Method 2: GetDeviceStatus
-    rpc GetDeviceStatus (DeviceIdentifier) returns (stream DeviceStatusResponse) {}
+    // Client Streaming RPC Method: GetDeviceStatus
+    rpc GetDeviceStatus (stream DeviceIdentifier) returns (DeviceStatusResponse) {}
 
-    // RPC Method 3: StreamDeviceLogs
+    // Bidirectional Streaming RPC Method: StreamDeviceLogs
     rpc StreamDeviceLogs (stream DeviceIdentifier) returns (stream DeviceLog) {}
 }
 

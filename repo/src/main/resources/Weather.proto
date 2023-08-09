@@ -8,13 +8,13 @@ package Weather;
 
 // Service 2: WeatherService
 service Weather {
-    // RPC Method 1: GetTemperature
+    // Unary RPC Method 1: GetTemperature
     rpc GetTemperature (WeatherLocation) returns (TemperatureResponse) {}
 
-    // RPC Method 2: GetHumidity
+    // Unary RPC Method 2: GetHumidity
     rpc GetHumidity (WeatherLocation) returns (HumidityResponse) {}
 
-    // RPC Method 3: GetWeatherForecast
+    // Unary RPC Method 3: GetWeatherForecast
     rpc GetWeatherForecast (WeatherForecastRequest) returns (WeatherForecastResponse) {}
 }
 

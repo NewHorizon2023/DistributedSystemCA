@@ -1,7 +1,5 @@
 package client;
 
-
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import base.controlPanel.ControlPanelGrpc;
@@ -34,22 +32,63 @@ public class ControlPanelClient {
 		}
 	}
 
+//	public static void getDeviceStatusInvoke() {
+//		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+//		try {
+//			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
+//					.newBlockingStub(channel);
+//			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
+//			builder.setDeviceId("11111");
+//			DeviceIdentifier request = builder.build();
+//			Iterator<base.controlPanel.DeviceStatusResponse> responseIterator = controlPanelBlockingStub
+//					.getDeviceStatus(request);
+//			while (responseIterator.hasNext()) {
+//				DeviceStatusResponse next = responseIterator.next();
+//				System.out.println("Response- device id is: " + next.getDeviceId());
+//				System.out.println("Response- device status is: " + next.getStatus());
+//			}
+//
+//		} catch (Exception e) {
+//			e.getStackTrace();
+//		} finally {
+//			channel.shutdown();
+//		}
+//	}
+
 	public static void getDeviceStatusInvoke() {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 		try {
-			ControlPanelGrpc.ControlPanelBlockingStub controlPanelBlockingStub = ControlPanelGrpc
-					.newBlockingStub(channel);
-			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
-			builder.setDeviceId("11111");
-			DeviceIdentifier request = builder.build();
-			Iterator<base.controlPanel.DeviceStatusResponse> responseIterator = controlPanelBlockingStub
-					.getDeviceStatus(request);
-			while (responseIterator.hasNext()) {
-				DeviceStatusResponse next = responseIterator.next();
-				System.out.println("Response- device id is: " + next.getDeviceId());
-				System.out.println("Response- device status is: " + next.getStatus());
+			ControlPanelGrpc.ControlPanelStub controlPanelStub = ControlPanelGrpc.newStub(channel);
+			StreamObserver<DeviceIdentifier> reqObserver = controlPanelStub
+					.getDeviceStatus(new StreamObserver<DeviceStatusResponse>() {
+
+						@Override
+						public void onNext(DeviceStatusResponse value) {
+							// TODO show device status on client
+
+						}
+
+						@Override
+						public void onError(Throwable t) {
+
+						}
+
+						@Override
+						public void onCompleted() {
+
+						}
+					});
+			// TODO set data through client here
+			for (int i = 0; i < 10; i++) {
+				DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
+				// TODO set device id here
+				builder.setDeviceId("001");
+				DeviceIdentifier request = builder.build();
+				reqObserver.onNext(request);
+
 			}
 
+			reqObserver.onCompleted();
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -93,6 +132,8 @@ public class ControlPanelClient {
 			channel.awaitTermination(12, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			e.getStackTrace();
+		} finally {
+			channel.shutdown();
 		}
 	}
 

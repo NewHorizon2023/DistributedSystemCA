@@ -54,7 +54,7 @@ public final class ControlPanelImpl {
       "trolPanel.DeviceStatusResponse\"\000\022Y\n\017GetD" +
       "eviceStatus\022\036.ControlPanel.DeviceIdentif" +
       "ier\032\".ControlPanel.DeviceStatusResponse\"" +
-      "\0000\001\022Q\n\020StreamDeviceLogs\022\036.ControlPanel.D" +
+      "\000(\001\022Q\n\020StreamDeviceLogs\022\036.ControlPanel.D" +
       "eviceIdentifier\032\027.ControlPanel.DeviceLog" +
       "\"\000(\0010\001B\'\n\021base.controlPanelB\020ControlPane" +
       "lImplP\001b\006proto3"
