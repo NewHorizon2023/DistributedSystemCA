@@ -1,15 +1,13 @@
 package server;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Random;
 
+import base.pollutionSensor.PollutionReading;
+import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import util.DataUtil;
 import util.TimeUtil;
-import base.pollutionSensor.PollutionReading;
-import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
 
 public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 
