@@ -22,10 +22,11 @@ public class LoginClient {
 		LoginRequest request = builder.build();
 		// TODO Use this response data.
 		LoginResponse response = service.login(request);
+		System.out.println(response.getSuccess() + " 111111111:" + response.getMessage());
 	}
 
 	public static void main(String[] args) {
-
+		login("admin", "123456");
 	}
 
 }
