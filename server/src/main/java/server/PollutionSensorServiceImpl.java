@@ -12,6 +12,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import pojo.PollutionPojo;
 import util.DataUtil;
+import util.PropertiesUtil;
 import util.TimeUtil;
 
 public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
@@ -19,7 +20,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		PollutionSensorServiceImpl pollutionSensorServiceImpl = new PollutionSensorServiceImpl();
 
-		int port = 50052;
+		int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_2));;
 
 		Server server = ServerBuilder.forPort(port).addService(pollutionSensorServiceImpl).build().start();
 
