@@ -34,11 +34,11 @@ public final class LoginImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Login.proto\022\005Login\"2\n\014LoginRequest\022\020\n\010" +
-      "username\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"1\n\rLogi" +
-      "nResponse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 " +
-      "\001(\t2=\n\005Login\0224\n\005Login\022\023.Login.LoginReque" +
-      "st\032\024.Login.LoginResponse\"\000B\031\n\nbase.login" +
-      "B\tLoginImplP\001b\006proto3"
+      "username\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"@\n\rLogi" +
+      "nResponse\022\017\n\007success\030\001 \001(\010\022\r\n\005token\030\002 \001(" +
+      "\t\022\017\n\007message\030\003 \001(\t2=\n\005Login\0224\n\005Login\022\023.L" +
+      "ogin.LoginRequest\032\024.Login.LoginResponse\"" +
+      "\000B\031\n\nbase.loginB\tLoginImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -63,7 +63,7 @@ public final class LoginImpl {
     internal_static_Login_LoginResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Login_LoginResponse_descriptor,
-        new java.lang.String[] { "Success", "Message", });
+        new java.lang.String[] { "Success", "Token", "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

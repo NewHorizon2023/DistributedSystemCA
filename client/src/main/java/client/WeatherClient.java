@@ -1,19 +1,12 @@
 package client;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.concurrent.CompletableFuture;
-
-import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceEvent;
-import javax.jmdns.ServiceListener;
-
 import base.weather.WeatherForecastRequest;
 import base.weather.WeatherForecastResponse;
 import base.weather.WeatherGrpc;
-import enmu.ServiceInfoEnum;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.MetadataUtils;
+import util.AuthenticationUtil;
 
 public class WeatherClient {
 
@@ -24,16 +17,22 @@ public class WeatherClient {
 			WeatherForecastRequest.Builder builder = WeatherForecastRequest.newBuilder();
 			builder.setLatitude(latitude).setLongitude(longitude);
 			WeatherForecastRequest request = builder.build();
-			// TODO Show weather forecast data on gui.
-			WeatherForecastResponse weatherForecast = service.getWeatherForecast(request);
-			System.out.println("Humidity: " + weatherForecast.getHumidity());
+
+			// Call the RPC method with the request and metadata
+			WeatherForecastResponse response = service
+					.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild()))
+					.getWeatherForecast(request);
+
+			System.out.println("Response received: " + response);
+
+			System.out.println("Humidity: " + response.getHumidity());
 
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
 			channel.shutdown();
 		}
-		
+
 //		try {
 //		    JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 //

@@ -9,12 +9,18 @@ import io.grpc.ManagedChannelBuilder;
 public class LoginClient {
 
 	/**
+	 * TODO Used to store tokens, expedient
+	 */
+	public static String token;
+
+	/**
 	 * Login method
 	 * 
 	 * @param username
 	 * @param password
+	 * @throws InterruptedException
 	 */
-	public static void login(String username, String password) {
+	public static void login(String username, String password) throws InterruptedException {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50050).usePlaintext().build();
 		LoginGrpc.LoginBlockingStub service = LoginGrpc.newBlockingStub(channel);
 		LoginRequest.Builder builder = LoginRequest.newBuilder();
@@ -22,10 +28,16 @@ public class LoginClient {
 		LoginRequest request = builder.build();
 		// TODO Use this response data.
 		LoginResponse response = service.login(request);
-		System.out.println(response.getSuccess() + " 111111111:" + response.getMessage());
+		// TODO how to store token?
+		if (response.getSuccess()) {
+			token = response.getToken();
+			System.out.println("token is: " + response.getToken());
+		}
+
+		Thread.sleep(1000000);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		login("admin", "123456");
 	}
 
