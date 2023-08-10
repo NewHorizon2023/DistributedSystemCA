@@ -2,9 +2,6 @@ package client;
 
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import base.controlPanel.ControlPanelGrpc;
 import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
@@ -16,7 +13,7 @@ import io.grpc.stub.StreamObserver;
 
 public class ControlPanelClient {
 
-	private static final Logger logger = LoggerFactory.getLogger(ControlPanelClient.class);
+//	private static final Logger logger = LoggerFactory.getLogger(ControlPanelClient.class);
 
 	public static void setDeviceStatusInvoke() {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
@@ -47,26 +44,26 @@ public class ControlPanelClient {
 						@Override
 						public void onNext(DeviceStatusResponse value) {
 							// TODO show device status on client
-							System.out.println("method 2 gets a response...");
+							System.out.println("method 2 gets a response, value is: " + value);
 
 						}
 
 						@Override
 						public void onError(Throwable t) {
-							logger.debug("Error happend on client!!!!");
-							logger.debug("Error on client is: ", t);
+//							logger.debug("Error happend on client!!!!");
+//							logger.debug("Error on client is: ", t);
 						}
 
 						@Override
 						public void onCompleted() {
-							logger.debug("Client recieves completed info from server.");
+							System.out.println("Client recieves completed info from server.");
 						}
 					});
 			// TODO set data through client here
 			for (int i = 0; i < 10; i++) {
 				DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
 				// TODO set device id here
-				builder.setDeviceId("003");
+				builder.setDeviceId("0000-" + i);
 				DeviceIdentifier request = builder.build();
 				reqObserver.onNext(request);
 				Thread.sleep(2000);
@@ -125,8 +122,8 @@ public class ControlPanelClient {
 
 	public static void main(String[] args) {
 //		setDeviceStatusInvoke();
-		getDeviceStatusInvoke();
-//		streamDeviceLogsInvoke();
+//		getDeviceStatusInvoke();
+		streamDeviceLogsInvoke();
 	}
 
 }

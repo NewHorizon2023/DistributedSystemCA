@@ -2,9 +2,6 @@ package server;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import base.controlPanel.ControlPanelGrpc.ControlPanelImplBase;
 import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
@@ -16,7 +13,7 @@ import util.PropertiesUtil;
 import util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
-	private static final Logger logger = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
+//	private static final Logger logger = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
@@ -65,26 +62,36 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 		return new StreamObserver<DeviceIdentifier>() {
 
+			String deviceId;
+
 			@Override
 			public void onNext(DeviceIdentifier value) {
-				logger.debug("parameter of method 2 is: " + value);
-				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
-				builder.setDeviceId(value.getDeviceId());
-				builder.setStatus(deviceStatus);
-				DeviceStatusResponse response = builder.build();
-				responseObserver.onNext(response);
+				deviceId = value.getDeviceId();
+//				logger.debug("parameter of method 2 is: " + deviceId);
+//				logger.debug("parameter of method 2 is: " + value);
+//				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
+//				builder.setDeviceId(value.getDeviceId());
+//				builder.setStatus(deviceStatus);
+//				DeviceStatusResponse response = builder.build();
+//				responseObserver.onNext(response);
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				logger.debug("Error happend on server!!!!");
-				logger.debug("Server error is: ", t);
+//				logger.debug("Error happend on server!!!!");
+//				logger.debug("Server error is: ", t);
 			}
 
 			@Override
 			public void onCompleted() {
+//				logger.debug("It is oprating : " + deviceId);
+				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
+				builder.setDeviceId(deviceId);
+				builder.setStatus(deviceStatus);
+				DeviceStatusResponse response = builder.build();
+				responseObserver.onNext(response);
 				responseObserver.onCompleted();
-				logger.debug("Server method 2 copleted.");
+//				logger.debug("Server method 2 copleted.");
 			}
 		};
 	}
@@ -103,14 +110,14 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			public void onNext(DeviceIdentifier value) {
 				System.out.println("parameter of method 3 is: " + value);
 				System.out.println("Server 1 value is: " + value);
-				DeviceLog.Builder builder = DeviceLog.newBuilder();
-				builder.setLogMessage(
-						deviceStatus ? "The device is running normally." : "The device has stopped running.");
-				builder.setTimestamp(TimeUtil.getTimeNow());
+//				DeviceLog.Builder builder = DeviceLog.newBuilder();
+//				builder.setLogMessage(
+//						deviceStatus ? "The device is running normally." : "The device has stopped running.");
+//				builder.setTimestamp(TimeUtil.getTimeNow());
+//
+//				DeviceLog response = builder.build();
+//				responseObserver.onNext(response);
 
-				DeviceLog response = builder.build();
-				responseObserver.onNext(response);
-				
 				System.out.println("The server has finished receiving");
 
 			}
@@ -122,6 +129,13 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onCompleted() {
+				DeviceLog.Builder builder = DeviceLog.newBuilder();
+				builder.setLogMessage(
+						deviceStatus ? "The device is running normally." : "The device has stopped running.");
+				builder.setTimestamp(TimeUtil.getTimeNow());
+
+				DeviceLog response = builder.build();
+				responseObserver.onNext(response);
 				responseObserver.onCompleted();
 				System.out.println("Method 3 is completed.");
 			}
