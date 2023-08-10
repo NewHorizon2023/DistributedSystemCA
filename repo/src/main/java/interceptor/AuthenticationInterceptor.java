@@ -26,13 +26,16 @@ public class AuthenticationInterceptor implements ServerInterceptor {
 		String token = headers.get(AUTHORIZATION_HEADER_KEY);
 		System.out.println("Server token is: " + token);
 
-		if (AUTHORIZATION_TOKEN.equals(token)) {
-			System.out.println("Authorization success!");
-			return next.startCall(call, headers);
-		} else {
-			call.close(Status.UNAUTHENTICATED.withDescription("Invalid credentials"), headers);
-			return new ServerCall.Listener<ReqT>() {
-			};
-		}
+		// TODO prohibit for test.
+		return next.startCall(call, headers);
+
+//		if (AUTHORIZATION_TOKEN.equals(token)) {
+//			System.out.println("Authorization success!");
+//			return next.startCall(call, headers);
+//		} else {
+//			call.close(Status.UNAUTHENTICATED.withDescription("Invalid credentials"), headers);
+//			return new ServerCall.Listener<ReqT>() {
+//			};
+//		}
 	}
 }

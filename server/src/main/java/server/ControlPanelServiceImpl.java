@@ -38,6 +38,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 
 		String deviceId = request.getDeviceId();
+		System.out.println("parameter of method 1 is: " + deviceId);
 		deviceStatus = request.getStatus();
 
 		DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
@@ -62,13 +63,12 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onNext(DeviceIdentifier value) {
-				System.out.println("recieved client data.");
+				System.out.println("parameter of method 2 is: " + value);
 				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
 				builder.setDeviceId(value.getDeviceId());
 				builder.setStatus(deviceStatus);
 				DeviceStatusResponse response = builder.build();
 				responseObserver.onNext(response);
-				responseObserver.onCompleted();
 			}
 
 			@Override
@@ -78,7 +78,8 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onCompleted() {
-
+				responseObserver.onCompleted();
+				System.out.println("Server method 2 copleted.");
 			}
 		};
 	}
@@ -95,6 +96,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onNext(DeviceIdentifier value) {
+				System.out.println("parameter of method 3 is: " + value);
 				System.out.println("Server 1 value is: " + value);
 				DeviceLog.Builder builder = DeviceLog.newBuilder();
 				builder.setLogMessage(
@@ -103,7 +105,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 				DeviceLog response = builder.build();
 				responseObserver.onNext(response);
-				responseObserver.onCompleted();
+				
 				System.out.println("The server has finished receiving");
 
 			}
@@ -115,6 +117,8 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onCompleted() {
+				responseObserver.onCompleted();
+				System.out.println("Method 3 is completed.");
 			}
 
 		};

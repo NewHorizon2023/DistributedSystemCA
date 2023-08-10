@@ -24,7 +24,7 @@ public class ControlPanelClient {
 			DeviceStatusResponse response = controlPanleService.setDeviceStatus(request);
 			String deviceId = response.getDeviceId();
 			boolean status = response.getStatus();
-//			System.out.println(deviceId + ", " + status);
+			System.out.println(deviceId + ", " + status);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -42,6 +42,7 @@ public class ControlPanelClient {
 						@Override
 						public void onNext(DeviceStatusResponse value) {
 							// TODO show device status on client
+							System.out.println("method 2 gets a response...");
 
 						}
 
@@ -59,13 +60,15 @@ public class ControlPanelClient {
 			for (int i = 0; i < 10; i++) {
 				DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
 				// TODO set device id here
-				builder.setDeviceId("001");
+				builder.setDeviceId("003");
 				DeviceIdentifier request = builder.build();
 				reqObserver.onNext(request);
-
+				Thread.sleep(2000);
 			}
 
 			reqObserver.onCompleted();
+			// TODO for test
+			channel.awaitTermination(5, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -98,15 +101,15 @@ public class ControlPanelClient {
 
 			for (int i = 0; i < 10; i++) {
 				DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
-				builder.setDeviceId("001");
+				builder.setDeviceId("0000-" + i);
 				DeviceIdentifier request = builder.build();
 				requestObserver.onNext(request);
 
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			}
 
 			requestObserver.onCompleted();
-			channel.awaitTermination(12, TimeUnit.MINUTES);
+			channel.awaitTermination(12, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -116,7 +119,8 @@ public class ControlPanelClient {
 
 	public static void main(String[] args) {
 //		setDeviceStatusInvoke();
-		streamDeviceLogsInvoke();
+		getDeviceStatusInvoke();
+//		streamDeviceLogsInvoke();
 	}
 
 }
