@@ -1,4 +1,4 @@
-package server;
+package project.server;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import base.login.LoginResponse;
 import interceptor.AuthenticationInterceptor;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import util.PropertiesUtil;
-import util.TokenUtil;
+import project.util.PropertiesUtil;
+import project.util.TokenUtil;
 
 public class LoginServiceImpl extends LoginImplBase {
 

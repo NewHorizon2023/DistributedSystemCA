@@ -1,4 +1,4 @@
-package server;
+package project.server;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -11,8 +11,8 @@ import base.weather.WeatherGrpc.WeatherImplBase;
 import enmu.ServiceInfoEnum;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import util.DataUtil;
-import util.PropertiesUtil;
+import project.util.DataUtil;
+import project.util.PropertiesUtil;
 
 public class WeatherServiceImpl extends WeatherImplBase {
 

@@ -1,4 +1,4 @@
-package client;
+package project.client;
 
 import java.util.concurrent.TimeUnit;
 

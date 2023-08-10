@@ -1,4 +1,4 @@
-package client;
+package project.client;
 
 import base.weather.WeatherForecastRequest;
 import base.weather.WeatherForecastResponse;
@@ -6,7 +6,7 @@ import base.weather.WeatherGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.MetadataUtils;
-import util.AuthenticationUtil;
+import project.util.AuthenticationUtil;
 
 public class WeatherClient {
 

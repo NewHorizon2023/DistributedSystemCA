@@ -1,4 +1,4 @@
-package util;
+package project.util;
 
 import java.text.DecimalFormat;
 import java.util.Random;

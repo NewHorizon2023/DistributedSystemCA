@@ -1,4 +1,4 @@
-package server;
+package project.server;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import base.controlPanel.DeviceStatusResponse;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import util.PropertiesUtil;
-import util.TimeUtil;
+import project.util.PropertiesUtil;
+import project.util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
 //	private static final Logger logger = LoggerFactory.getLogger(ControlPanelServiceImpl.class);

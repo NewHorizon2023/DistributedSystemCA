@@ -1,4 +1,4 @@
-package client;
+package project.client;
 
 import base.login.LoginGrpc;
 import base.login.LoginRequest;

@@ -1,4 +1,4 @@
-package pojo;
+package project.pojo;
 
 /**
  * Pollution data.

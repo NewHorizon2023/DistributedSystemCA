@@ -1,8 +1,8 @@
-package util;
+package project.util;
 
-import client.LoginClient;
 import interceptor.AuthenticationInterceptor;
 import io.grpc.Metadata;
+import project.client.LoginClient;
 
 public class AuthenticationUtil {
 

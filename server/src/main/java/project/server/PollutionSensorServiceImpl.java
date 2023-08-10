@@ -1,4 +1,4 @@
-package server;
+package project.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,10 +10,10 @@ import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import pojo.PollutionPojo;
-import util.DataUtil;
-import util.PropertiesUtil;
-import util.TimeUtil;
+import project.pojo.PollutionPojo;
+import project.util.DataUtil;
+import project.util.PropertiesUtil;
+import project.util.TimeUtil;
 
 public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 
