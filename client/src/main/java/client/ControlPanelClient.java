@@ -2,6 +2,9 @@ package client;
 
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import base.controlPanel.ControlPanelGrpc;
 import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
@@ -12,6 +15,8 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class ControlPanelClient {
+
+	private static final Logger logger = LoggerFactory.getLogger(ControlPanelClient.class);
 
 	public static void setDeviceStatusInvoke() {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
@@ -48,12 +53,13 @@ public class ControlPanelClient {
 
 						@Override
 						public void onError(Throwable t) {
-
+							logger.debug("Error happend on client!!!!");
+							logger.debug("Error on client is: ", t);
 						}
 
 						@Override
 						public void onCompleted() {
-
+							logger.debug("Client recieves completed info from server.");
 						}
 					});
 			// TODO set data through client here
@@ -68,7 +74,7 @@ public class ControlPanelClient {
 
 			reqObserver.onCompleted();
 			// TODO for test
-			channel.awaitTermination(5, TimeUnit.MINUTES);
+			channel.awaitTermination(60, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -105,11 +111,11 @@ public class ControlPanelClient {
 				DeviceIdentifier request = builder.build();
 				requestObserver.onNext(request);
 
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			}
 
 			requestObserver.onCompleted();
-			channel.awaitTermination(12, TimeUnit.SECONDS);
+			channel.awaitTermination(60, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {

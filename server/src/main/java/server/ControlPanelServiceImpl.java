@@ -2,6 +2,9 @@ package server;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import base.controlPanel.ControlPanelGrpc.ControlPanelImplBase;
 import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
@@ -13,6 +16,7 @@ import util.PropertiesUtil;
 import util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
+	private static final Logger logger = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
@@ -63,7 +67,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onNext(DeviceIdentifier value) {
-				System.out.println("parameter of method 2 is: " + value);
+				logger.debug("parameter of method 2 is: " + value);
 				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
 				builder.setDeviceId(value.getDeviceId());
 				builder.setStatus(deviceStatus);
@@ -73,13 +77,14 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onError(Throwable t) {
-
+				logger.debug("Error happend on server!!!!");
+				logger.debug("Server error is: ", t);
 			}
 
 			@Override
 			public void onCompleted() {
 				responseObserver.onCompleted();
-				System.out.println("Server method 2 copleted.");
+				logger.debug("Server method 2 copleted.");
 			}
 		};
 	}
