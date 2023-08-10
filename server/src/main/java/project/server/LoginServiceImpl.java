@@ -7,14 +7,14 @@ import base.login.LoginResponse;
 import interceptor.AuthenticationInterceptor;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import project.util.PropertiesUtil;
+import project.util.ServerPropertiesUtil;
 import project.util.TokenUtil;
 
 public class LoginServiceImpl extends LoginImplBase {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		LoginServiceImpl logInService = new LoginServiceImpl();
-		int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_0));
+		int port = Integer.parseInt(ServerPropertiesUtil.getProperty(ServerPropertiesUtil.SERVER_PORT_0));
 		Server server = ServerBuilder.forPort(port).addService(logInService).build().start();
 		server.awaitTermination();
 	}
@@ -27,8 +27,8 @@ public class LoginServiceImpl extends LoginImplBase {
 			io.grpc.stub.StreamObserver<base.login.LoginResponse> responseObserver) {
 
 		// Determine whether the username and password are correct
-		boolean success = PropertiesUtil.getProperty(PropertiesUtil.USERNAME_STRING).equals(request.getUsername())
-				&& PropertiesUtil.getProperty(PropertiesUtil.PASSWORD_STRING).equals(request.getPassword());
+		boolean success = ServerPropertiesUtil.getProperty(ServerPropertiesUtil.USERNAME_STRING).equals(request.getUsername())
+				&& ServerPropertiesUtil.getProperty(ServerPropertiesUtil.PASSWORD_STRING).equals(request.getPassword());
 
 		LoginResponse.Builder builder = LoginResponse.newBuilder();
 

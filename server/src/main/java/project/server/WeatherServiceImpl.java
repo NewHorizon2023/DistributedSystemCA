@@ -12,7 +12,7 @@ import enmu.ServiceInfoEnum;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import project.util.DataUtil;
-import project.util.PropertiesUtil;
+import project.util.ServerPropertiesUtil;
 
 public class WeatherServiceImpl extends WeatherImplBase {
 
@@ -31,7 +31,7 @@ public class WeatherServiceImpl extends WeatherImplBase {
 			// Create a jmDNS instance
 			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
-			int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_3));
+			int port = Integer.parseInt(ServerPropertiesUtil.getProperty(ServerPropertiesUtil.SERVER_PORT_3));
 
 			// Define the service information for the gRPC service
 			ServiceInfo serviceInfo = ServiceInfo.create(ServiceInfoEnum.WEATHER.getType(),

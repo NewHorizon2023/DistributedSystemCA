@@ -9,7 +9,7 @@ import base.controlPanel.DeviceStatusResponse;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import project.util.PropertiesUtil;
+import project.util.ServerPropertiesUtil;
 import project.util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
@@ -17,7 +17,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
-		int port = Integer.parseInt(PropertiesUtil.getProperty(PropertiesUtil.SERVER_PORT_1));
+		int port = Integer.parseInt(ServerPropertiesUtil.getProperty(ServerPropertiesUtil.SERVER_PORT_1));
 
 		Server server = ServerBuilder.forPort(port).addService(controlPanel).build().start();
 		System.out.println("Service-Weather started, listening on " + port);
