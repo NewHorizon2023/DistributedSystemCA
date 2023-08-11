@@ -1,10 +1,14 @@
 package project.client;
 
+import java.util.concurrent.TimeUnit;
+
 import base.login.LoginGrpc;
 import base.login.LoginRequest;
 import base.login.LoginResponse;
+import io.grpc.Grpc;
+import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import project.jmdns.JmDnsServiceDiscovery;
 
 public class LoginClient {
 
@@ -18,27 +22,30 @@ public class LoginClient {
 	 * 
 	 * @param username
 	 * @param password
-	 * @throws InterruptedException
+	 * @param channel
+	 * @return
 	 */
-	public static void login(String username, String password) throws InterruptedException {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50050).usePlaintext().build();
+	public static LoginResponse login(String username, String password, ManagedChannel channel) {
 		LoginGrpc.LoginBlockingStub service = LoginGrpc.newBlockingStub(channel);
 		LoginRequest.Builder builder = LoginRequest.newBuilder();
 		builder.setUsername(username).setPassword(password);
 		LoginRequest request = builder.build();
-		// TODO Use this response data.
-		LoginResponse response = service.login(request);
-		// TODO how to store token?
-		if (response.getSuccess()) {
-			token = response.getToken();
-			System.out.println("token is: " + response.getToken());
-		}
 
-		Thread.sleep(1000000);
+		return service.login(request);
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		login("admin", "123456");
+		// TODO For test.
+		ManagedChannel channel = Grpc
+				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
+		try {
+			login("admin", "123456", channel);
+			channel.awaitTermination(120, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			channel.shutdown();
+		}
 	}
 
 }

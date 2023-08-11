@@ -2,47 +2,48 @@ package project.client;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import base.pollutionSensor.PollutionHistoryRequest;
 import base.pollutionSensor.PollutionHistoryResponse;
 import base.pollutionSensor.PollutionLocation;
 import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc;
+import io.grpc.Grpc;
+import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import project.jmdns.JmDnsServiceDiscovery;
 
 public class PollutionSensorClient {
+	private static final Logger LOGGER = LoggerFactory.getLogger(PollutionSensorClient.class);
 
 	/**
 	 * Get pollution level infomation.
 	 * 
 	 * @param latitude
 	 * @param longitude
+	 * @param channel
 	 */
-	public static void getPollutionLevelInvoke(double latitude, double longitude) {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
-		try {
-			PollutionSensorGrpc.PollutionSensorBlockingStub service = PollutionSensorGrpc.newBlockingStub(channel);
-			PollutionLocation.Builder builder = PollutionLocation.newBuilder();
-			builder.setLatitude(latitude);
-			builder.setLongitude(longitude);
-			PollutionLocation request = builder.build();
-			Iterator<PollutionReading> pollutionLevelIterator = service.getPollutionLevel(request);
+	public static void getPollutionLevelInvoke(double latitude, double longitude, ManagedChannel channel) {
+		PollutionSensorGrpc.PollutionSensorBlockingStub service = PollutionSensorGrpc.newBlockingStub(channel);
+		PollutionLocation.Builder builder = PollutionLocation.newBuilder();
+		builder.setLatitude(latitude);
+		builder.setLongitude(longitude);
+		PollutionLocation request = builder.build();
+		Iterator<PollutionReading> pollutionLevelIterator = service.getPollutionLevel(request);
 
-			// Get pollution level infomation
-			while (pollutionLevelIterator.hasNext()) {
-				PollutionReading pollution = pollutionLevelIterator.next();
-				// TODO show these data on gui.
-				double pollutionLevel = pollution.getPollutionLevel();
-				String timestamp = pollution.getTimestamp();
-				System.out.println("pollution level: " + pollutionLevel + "time: " + timestamp);
-			}
-
-		} catch (Exception e) {
-			e.getStackTrace();
-		} finally {
-			channel.shutdown();
+		// Get pollution level infomation
+		while (pollutionLevelIterator.hasNext()) {
+			PollutionReading pollution = pollutionLevelIterator.next();
+			// TODO show these data on gui.
+			double pollutionLevel = pollution.getPollutionLevel();
+			String timestamp = pollution.getTimestamp();
+			LOGGER.info("pollution level: " + pollutionLevel + "time: " + timestamp);
 		}
+
 	}
 
 	/**
@@ -52,20 +53,31 @@ public class PollutionSensorClient {
 	 * @param longitude
 	 * @param startDate
 	 * @param endDate
+	 * @param channel
+	 * @return
 	 */
-	public static void getPollutionHistoryInvoke(double latitude, double longitude, String startDate, String endDate) {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
+	public static List<PollutionReading> getPollutionHistoryInvoke(double latitude, double longitude, String startDate,
+			String endDate, ManagedChannel channel) {
+		PollutionSensorGrpc.PollutionSensorBlockingStub service = PollutionSensorGrpc.newBlockingStub(channel);
+		PollutionHistoryRequest.Builder builder = PollutionHistoryRequest.newBuilder();
+		builder.setLatitude(latitude).setLongitude(longitude).setStartDate(startDate).setEndDate(endDate);
+
+		PollutionHistoryRequest request = builder.build();
+		PollutionHistoryResponse response = service.getPollutionHistory(request);
+		// TODO show data on gui
+
+		return response.getPollutionReadingsList();
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO For test.
+		ManagedChannel channel = Grpc
+				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
-			PollutionSensorGrpc.PollutionSensorBlockingStub service = PollutionSensorGrpc.newBlockingStub(channel);
-			PollutionHistoryRequest.Builder builder = PollutionHistoryRequest.newBuilder();
-			builder.setLatitude(latitude).setLongitude(longitude).setStartDate(startDate).setEndDate(endDate);
+			getPollutionLevelInvoke(1, 2, channel);
+			getPollutionHistoryInvoke(1, 2, "2023-08-09 20:00:00", "2023-08-09 21:00:00", channel);
 
-			PollutionHistoryRequest request = builder.build();
-			PollutionHistoryResponse response = service.getPollutionHistory(request);
-			// TODO show data on gui
-			List<PollutionReading> pollutionReadingList = response.getPollutionReadingsList();
-			System.out.println("pollution list size is: " + pollutionReadingList.size());
-
+			channel.awaitTermination(120, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			e.getStackTrace();
 		} finally {
@@ -73,8 +85,4 @@ public class PollutionSensorClient {
 		}
 	}
 
-	public static void main(String[] args) {
-//		getPollutionLevelInvoke(1, 2);
-		getPollutionHistoryInvoke(1, 2, "2023-08-09 20:00:00", "2023-08-09 21:00:00");
-	}
 }

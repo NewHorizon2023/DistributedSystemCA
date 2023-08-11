@@ -54,9 +54,9 @@ public class JmDnsServiceDiscovery {
 			LOGGER.info("Listening services");
 
 		} catch (UnknownHostException e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 	}
 
