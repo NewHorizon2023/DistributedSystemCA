@@ -1,28 +1,17 @@
 package project.server;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import base.controlPanel.ControlPanelGrpc.ControlPanelImplBase;
 import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
 import base.controlPanel.DeviceStatusResponse;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import project.util.ServerPropertiesUtil;
 import project.util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
-//	private static final Logger logger = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
-
-	public static void main(String[] args) throws InterruptedException, IOException {
-		ControlPanelServiceImpl controlPanel = new ControlPanelServiceImpl();
-		int port = Integer.parseInt(ServerPropertiesUtil.getProperty(ServerPropertiesUtil.SERVER_PORT_1));
-
-		Server server = ServerBuilder.forPort(port).addService(controlPanel).build().start();
-		System.out.println("Service-Weather started, listening on " + port);
-		server.awaitTermination();
-	}
+	private static final Logger LOGGER = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
 
 	/**
 	 * The status of sencor device which works normally only when it is "true".
@@ -39,7 +28,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			io.grpc.stub.StreamObserver<base.controlPanel.DeviceStatusResponse> responseObserver) {
 
 		String deviceId = request.getDeviceId();
-		System.out.println("parameter of method 1 is: " + deviceId);
+		LOGGER.info("parameter of method 1 is: " + deviceId);
 		deviceStatus = request.getStatus();
 
 		DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
@@ -67,31 +56,23 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			@Override
 			public void onNext(DeviceIdentifier value) {
 				deviceId = value.getDeviceId();
-//				logger.debug("parameter of method 2 is: " + deviceId);
-//				logger.debug("parameter of method 2 is: " + value);
-//				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
-//				builder.setDeviceId(value.getDeviceId());
-//				builder.setStatus(deviceStatus);
-//				DeviceStatusResponse response = builder.build();
-//				responseObserver.onNext(response);
+				LOGGER.info("Server 1 method 2 value is: " + deviceId + ", and device status is: " + deviceStatus);
+
 			}
 
 			@Override
 			public void onError(Throwable t) {
-//				logger.debug("Error happend on server!!!!");
-//				logger.debug("Server error is: ", t);
+				LOGGER.error("Server error is: ", t);
 			}
 
 			@Override
 			public void onCompleted() {
-//				logger.debug("It is oprating : " + deviceId);
 				DeviceStatusResponse.Builder builder = DeviceStatusResponse.newBuilder();
 				builder.setDeviceId(deviceId);
 				builder.setStatus(deviceStatus);
 				DeviceStatusResponse response = builder.build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
-//				logger.debug("Server method 2 copleted.");
 			}
 		};
 	}
@@ -108,23 +89,30 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onNext(DeviceIdentifier value) {
-				System.out.println("parameter of method 3 is: " + value);
-				System.out.println("Server 1 value is: " + value);
-//				DeviceLog.Builder builder = DeviceLog.newBuilder();
-//				builder.setLogMessage(
-//						deviceStatus ? "The device is running normally." : "The device has stopped running.");
-//				builder.setTimestamp(TimeUtil.getTimeNow());
-//
-//				DeviceLog response = builder.build();
-//				responseObserver.onNext(response);
+				LOGGER.info("Server 1 method 3 value is: " + value);
+				DeviceLog response1 = DeviceLog.newBuilder()
+						.setLogMessage(
+								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setTimestamp(TimeUtil.getTimeNow()).build();
+				responseObserver.onNext(response1);
 
-				System.out.println("The server has finished receiving");
+				DeviceLog response2 = DeviceLog.newBuilder()
+						.setLogMessage(
+								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setTimestamp(TimeUtil.getTimeNow()).build();
+				responseObserver.onNext(response2);
+
+				DeviceLog response3 = DeviceLog.newBuilder()
+						.setLogMessage(
+								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setTimestamp(TimeUtil.getTimeNow()).build();
+				responseObserver.onNext(response3);
 
 			}
 
 			@Override
 			public void onError(Throwable t) {
-
+				LOGGER.error("Server error is: ", t);
 			}
 
 			@Override
@@ -137,7 +125,7 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 				DeviceLog response = builder.build();
 				responseObserver.onNext(response);
 				responseObserver.onCompleted();
-				System.out.println("Method 3 is completed.");
+				LOGGER.info("Server 3 method 3 is completed.");
 			}
 
 		};

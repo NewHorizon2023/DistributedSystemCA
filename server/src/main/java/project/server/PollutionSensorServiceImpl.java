@@ -1,6 +1,5 @@
 package project.server;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,27 +7,11 @@ import java.util.stream.Collectors;
 import base.pollutionSensor.PollutionHistoryResponse;
 import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
 import project.pojo.PollutionPojo;
 import project.util.DataUtil;
-import project.util.ServerPropertiesUtil;
 import project.util.TimeUtil;
 
 public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
-
-	public static void main(String[] args) throws InterruptedException, IOException {
-		PollutionSensorServiceImpl pollutionSensorServiceImpl = new PollutionSensorServiceImpl();
-
-		int port = Integer.parseInt(ServerPropertiesUtil.getProperty(ServerPropertiesUtil.SERVER_PORT_2));
-		;
-
-		Server server = ServerBuilder.forPort(port).addService(pollutionSensorServiceImpl).build().start();
-
-		System.out.println("Service-Weather started, listening on " + port);
-
-		server.awaitTermination();
-	}
 
 	/**
 	 * Pollution history data.

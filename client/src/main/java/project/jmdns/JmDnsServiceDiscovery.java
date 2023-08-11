@@ -72,7 +72,7 @@ public class JmDnsServiceDiscovery {
 
 		// wait for the service to be discovered
 		while (locGrpc.length() < 2) {
-			LOGGER.info("jmDnsServiceDiscovery: " + locGrpc);
+			LOGGER.debug("jmDnsServiceDiscovery: " + locGrpc);
 		}
 
 		return locGrpc;

@@ -50,15 +50,13 @@ public class ControlPanelClient {
 
 					@Override
 					public void onNext(DeviceStatusResponse value) {
-						// TODO show device status on client
 						LOGGER.info("method 2 gets a response, value is: " + value);
 
 					}
 
 					@Override
 					public void onError(Throwable t) {
-//							logger.debug("Error happend on client!!!!");
-//							logger.debug("Error on client is: ", t);
+						LOGGER.error("Error on client is: ", t);
 					}
 
 					@Override
@@ -125,8 +123,8 @@ public class ControlPanelClient {
 				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
 			setDeviceStatusInvoke(channel);
-			getDeviceStatusInvoke(channel);
-			streamDeviceLogsInvoke(channel);
+//			getDeviceStatusInvoke(channel);
+//			streamDeviceLogsInvoke(channel);
 
 			channel.awaitTermination(120, TimeUnit.SECONDS);
 		} catch (Exception e) {

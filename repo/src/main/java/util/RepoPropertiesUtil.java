@@ -12,7 +12,7 @@ public class RepoPropertiesUtil {
 		// Load properties file in static code block
 		properties = new Properties();
 		try (InputStream inputStream = RepoPropertiesUtil.class.getClassLoader()
-				.getResourceAsStream("repo_config.properties")) {
+				.getResourceAsStream("properties/repo_config.properties")) {
 			properties.load(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();

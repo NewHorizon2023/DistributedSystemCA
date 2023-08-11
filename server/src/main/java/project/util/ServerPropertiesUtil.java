@@ -5,12 +5,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ServerPropertiesUtil {
-	public static final String SERVER_IP = "server.ip";
-
-	public static final String SERVER_PORT_0 = "server.port0";
-	public static final String SERVER_PORT_1 = "server.port1";
-	public static final String SERVER_PORT_2 = "server.port2";
-	public static final String SERVER_PORT_3 = "server.port3";
 
 	public static final String USERNAME_STRING = "user.username";
 	public static final String PASSWORD_STRING = "user.password";
@@ -24,7 +18,7 @@ public class ServerPropertiesUtil {
 		// Load properties file in static code block
 		properties = new Properties();
 		try (InputStream inputStream = ServerPropertiesUtil.class.getClassLoader()
-				.getResourceAsStream("server_config.properties")) {
+				.getResourceAsStream("properties/server_config.properties")) {
 			properties.load(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();

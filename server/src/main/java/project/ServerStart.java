@@ -29,6 +29,12 @@ public class ServerStart {
 	static Random rand = new Random();
 	private Server server;
 
+	/**
+	 * Start all these 4 servers.
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	private void start() throws IOException, InterruptedException {
 		/* Grpc will find a suitable port to run the services (see "0" below) */
 		server = Grpc.newServerBuilderForPort(0, InsecureServerCredentials.create())
@@ -54,6 +60,11 @@ public class ServerStart {
 		});
 	}
 
+	/**
+	 * Stop server.
+	 * 
+	 * @throws InterruptedException
+	 */
 	private void stop() throws InterruptedException {
 		if (server != null) {
 			server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
