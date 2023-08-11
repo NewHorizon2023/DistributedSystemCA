@@ -18,14 +18,14 @@ import project.server.PollutionSensorServiceImpl;
 import project.server.WeatherServiceImpl;
 import util.RepoPropertiesUtil;
 
-public class ServerStart {
+public class Start {
 	public static void main(String[] args) throws IOException, InterruptedException {
-		final ServerStart server = new ServerStart();
+		final Start server = new Start();
 		server.start();
 		server.blockUntilShutdown();
 	}
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServerStart.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Start.class);
 	static Random rand = new Random();
 	private Server server;
 
@@ -51,7 +51,7 @@ public class ServerStart {
 				// Use stderr here since the logger may have been reset by its JVM shutdown hook.
 				LOGGER.error("*** shutting down gRPC server since JVM is shutting down");
 				try {
-					ServerStart.this.stop();
+					Start.this.stop();
 				} catch (InterruptedException e) {
 					e.printStackTrace(System.err);
 				}
