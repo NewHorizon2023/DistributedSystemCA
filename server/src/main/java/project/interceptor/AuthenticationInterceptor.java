@@ -1,4 +1,4 @@
-package interceptor;
+package project.interceptor;
 
 import io.grpc.Metadata;
 import io.grpc.Metadata.Key;
