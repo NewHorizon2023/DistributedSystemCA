@@ -27,9 +27,6 @@ import project.client.WeatherClient;
 import project.jmdns.JmDnsServiceDiscovery;
 
 public class PanelGui {
-	public static void main(String[] args) throws InterruptedException {
-		buildPanel("");
-	}
 
 	public static void buildPanel(String token) throws InterruptedException {
 		JFrame frame = new JFrame("gRPC Control Panel");
@@ -50,10 +47,10 @@ public class PanelGui {
 		controlPanel.add(getDeviceStatusBtn);
 		controlPanel.add(streamDeviceLogsBtn);
 
-		// 添加 ControlPanel 部分的大的 JTextArea
+		// Add a large JTextArea to the ControlPanel section
 		JTextArea controlPanelTextArea = new JTextArea();
-		controlPanelTextArea.setLineWrap(true); // 设置自动换行
-		controlPanelTextArea.setWrapStyleWord(true); // 设置以单词为单位换行
+		controlPanelTextArea.setLineWrap(true);
+		controlPanelTextArea.setWrapStyleWord(true);
 		JScrollPane controlPanelScrollPane = new JScrollPane(controlPanelTextArea);
 		controlPanelScrollPane.setPreferredSize(new Dimension(400, 100)); // 设置首选大小
 		controlPanel.add(controlPanelScrollPane, BorderLayout.SOUTH);
@@ -66,10 +63,10 @@ public class PanelGui {
 		pollutionSensorPanel.add(getPollutionLevelBtn);
 		pollutionSensorPanel.add(getPollutionHistoryBtn);
 
-		// 添加 PollutionSensor 部分的大的 JTextArea
+		// Add large JTextArea for PollutionSensor part
 		JTextArea pollutionSensorTextArea = new JTextArea();
-		pollutionSensorTextArea.setLineWrap(true); // 设置自动换行
-		pollutionSensorTextArea.setWrapStyleWord(true); // 设置以单词为单位换行
+		pollutionSensorTextArea.setLineWrap(true);
+		pollutionSensorTextArea.setWrapStyleWord(true);
 		JScrollPane pollutionSensorScrollPane = new JScrollPane(pollutionSensorTextArea);
 		pollutionSensorScrollPane.setPreferredSize(new Dimension(400, 100)); // 设置首选大小
 		pollutionSensorPanel.add(pollutionSensorScrollPane, BorderLayout.SOUTH);
@@ -80,12 +77,12 @@ public class PanelGui {
 		JButton getWeatherForecastBtn = new JButton("Get Weather Forecast");
 		weatherPanel.add(getWeatherForecastBtn);
 
-		// 添加 Weather 部分的大的 JTextArea
+		// Add a large JTextArea for the Weather section
 		JTextArea weatherTextArea = new JTextArea();
-		weatherTextArea.setLineWrap(true); // 设置自动换行
-		weatherTextArea.setWrapStyleWord(true); // 设置以单词为单位换行
+		weatherTextArea.setLineWrap(true);
+		weatherTextArea.setWrapStyleWord(true);
 		JScrollPane weatherScrollPane = new JScrollPane(weatherTextArea);
-		weatherScrollPane.setPreferredSize(new Dimension(400, 150)); // 设置首选大小
+		weatherScrollPane.setPreferredSize(new Dimension(400, 150));
 		weatherPanel.add(weatherScrollPane, BorderLayout.SOUTH);
 
 		// Adding panels to frame

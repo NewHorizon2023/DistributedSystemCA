@@ -17,7 +17,6 @@ public class AuthenticationUtil {
 	public static Metadata headersBuild(String token) {
 		Metadata headers = new Metadata();
 		LOGGER.info("Client token is: " + token);
-		// TODO Use other way to get token.
 		headers.put(AuthenticationInterceptor.AUTHORIZATION_HEADER_KEY, token);
 		return headers;
 	}

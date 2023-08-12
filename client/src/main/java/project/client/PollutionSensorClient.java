@@ -2,7 +2,6 @@ package project.client;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +11,9 @@ import base.pollutionSensor.PollutionHistoryResponse;
 import base.pollutionSensor.PollutionLocation;
 import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc;
-import io.grpc.Grpc;
-import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.MetadataUtils;
 import project.callback.CallBack;
-import project.jmdns.JmDnsServiceDiscovery;
 import project.util.AuthenticationUtil;
 
 public class PollutionSensorClient {
@@ -77,32 +73,8 @@ public class PollutionSensorClient {
 		PollutionHistoryResponse response = service
 				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild(token)))
 				.getPollutionHistory(request);
-		// TODO show data on gui
 
 		return response.getPollutionReadingsList();
-	}
-
-	public static void main(String[] args) throws InterruptedException {
-		// TODO For test.
-		ManagedChannel channel = Grpc
-				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
-		try {
-			getPollutionLevelInvoke(1, 2, channel, "", new CallBack() {
-
-				@Override
-				public void show(String result) {
-					LOGGER.info(result);
-				}
-			});
-
-			getPollutionHistoryInvoke(1, 2, "2023-08-09 20:00:00", "2023-08-09 21:00:00", channel, "");
-
-			channel.awaitTermination(120, TimeUnit.SECONDS);
-		} catch (Exception e) {
-			e.getStackTrace();
-		} finally {
-			channel.shutdown();
-		}
 	}
 
 }

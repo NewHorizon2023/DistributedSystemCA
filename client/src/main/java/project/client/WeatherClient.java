@@ -1,18 +1,13 @@
 package project.client;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import base.weather.WeatherForecastRequest;
 import base.weather.WeatherForecastResponse;
 import base.weather.WeatherGrpc;
-import io.grpc.Grpc;
-import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.MetadataUtils;
-import project.jmdns.JmDnsServiceDiscovery;
 import project.util.AuthenticationUtil;
 
 public class WeatherClient {
@@ -43,21 +38,6 @@ public class WeatherClient {
 		LOGGER.info("Humidity: " + response.getHumidity());
 
 		return response;
-	}
-
-	public static void main(String[] args) throws InterruptedException {
-		// For test.
-		ManagedChannel channel = Grpc
-				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
-		try {
-			getWeatherForecastInvoke(1, 2, channel, "");
-
-			channel.awaitTermination(120, TimeUnit.SECONDS);
-		} catch (Exception e) {
-			e.getStackTrace();
-		} finally {
-			channel.shutdown();
-		}
 	}
 
 }

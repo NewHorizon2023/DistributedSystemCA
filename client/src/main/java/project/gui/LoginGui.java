@@ -18,10 +18,6 @@ import project.grpc.GrpcChannelManager;
 
 public class LoginGui {
 
-	public static void main(String[] args) {
-		loginGui();
-	}
-
 	public static void loginGui() {
 		JFrame jf = new JFrame("Login");
 		jf.setSize(400, 250);

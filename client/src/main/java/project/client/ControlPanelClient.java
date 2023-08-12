@@ -1,7 +1,5 @@
 package project.client;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,13 +8,10 @@ import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
 import base.controlPanel.DeviceStatusRequest;
 import base.controlPanel.DeviceStatusResponse;
-import io.grpc.Grpc;
-import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.MetadataUtils;
 import io.grpc.stub.StreamObserver;
 import project.callback.CallBack;
-import project.jmdns.JmDnsServiceDiscovery;
 import project.util.AuthenticationUtil;
 import util.TimeUtil;
 
@@ -138,31 +133,6 @@ public class ControlPanelClient {
 		}
 
 		response.onCompleted();
-	}
-
-	public static void main(String[] args) throws InterruptedException {
-		// TODO For test.
-		ManagedChannel channel = Grpc
-				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
-		try {
-//			setDeviceStatusInvoke(channel, "");
-//			getDeviceStatusInvoke(channel);
-			streamDeviceLogsInvoke(channel, "", new CallBack() {
-
-				@Override
-				public void show(String result) {
-					// TODO Auto-generated method stub
-					System.out.println("===============This is callback result: " + result + "==============");
-				}
-
-			});
-
-			channel.awaitTermination(120, TimeUnit.SECONDS);
-		} catch (Exception e) {
-			e.getStackTrace();
-		} finally {
-			channel.shutdown();
-		}
 	}
 
 }
