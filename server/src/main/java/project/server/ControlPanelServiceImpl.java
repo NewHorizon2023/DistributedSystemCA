@@ -8,7 +8,7 @@ import base.controlPanel.DeviceIdentifier;
 import base.controlPanel.DeviceLog;
 import base.controlPanel.DeviceStatusResponse;
 import io.grpc.stub.StreamObserver;
-import project.util.TimeUtil;
+import util.TimeUtil;
 
 public class ControlPanelServiceImpl extends ControlPanelImplBase {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ControlPanelServiceImpl.class);
@@ -91,20 +91,20 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			public void onNext(DeviceIdentifier value) {
 				LOGGER.info("Server 1 method 3 value is: " + value);
 				DeviceLog response1 = DeviceLog.newBuilder()
-						.setLogMessage(
-								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "--: The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response1);
 
 				DeviceLog response2 = DeviceLog.newBuilder()
-						.setLogMessage(
-								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "---: The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response2);
 
 				DeviceLog response3 = DeviceLog.newBuilder()
-						.setLogMessage(
-								deviceStatus ? "The device is running normally." : "The device has stopped running.")
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "-----: The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response3);
 
@@ -117,13 +117,37 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 
 			@Override
 			public void onCompleted() {
-				DeviceLog.Builder builder = DeviceLog.newBuilder();
-				builder.setLogMessage(
-						deviceStatus ? "The device is running normally." : "The device has stopped running.");
-				builder.setTimestamp(TimeUtil.getTimeNow());
 
-				DeviceLog response = builder.build();
-				responseObserver.onNext(response);
+				DeviceLog response1 = DeviceLog.newBuilder()
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
+						.build();
+				responseObserver.onNext(response1);
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				DeviceLog response2 = DeviceLog.newBuilder()
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
+						.build();
+				responseObserver.onNext(response2);
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				DeviceLog response3 = DeviceLog.newBuilder()
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
+								: TimeUtil.getTimeNow() + ": The device has stopped running.")
+						.build();
+				responseObserver.onNext(response3);
+
 				responseObserver.onCompleted();
 				LOGGER.info("Server 3 method 3 is completed.");
 			}

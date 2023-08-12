@@ -13,11 +13,6 @@ import project.jmdns.JmDnsServiceDiscovery;
 public class LoginClient {
 
 	/**
-	 * TODO Used to store tokens, expedient
-	 */
-	public static String token;
-
-	/**
 	 * Login method
 	 * 
 	 * @param username

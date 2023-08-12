@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import interceptor.AuthenticationInterceptor;
 import io.grpc.Metadata;
-import project.client.LoginClient;
 
 public class AuthenticationUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationUtil.class);
@@ -15,11 +14,11 @@ public class AuthenticationUtil {
 	 * 
 	 * @return
 	 */
-	public static Metadata headersBuild() {
+	public static Metadata headersBuild(String token) {
 		Metadata headers = new Metadata();
-		LOGGER.info("Client token is: " + LoginClient.token);
+		LOGGER.info("Client token is: " + token);
 		// TODO Use other way to get token.
-		headers.put(AuthenticationInterceptor.AUTHORIZATION_HEADER_KEY, LoginClient.token);
+		headers.put(AuthenticationInterceptor.AUTHORIZATION_HEADER_KEY, token);
 		return headers;
 	}
 

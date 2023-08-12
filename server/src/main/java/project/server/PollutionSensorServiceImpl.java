@@ -9,7 +9,7 @@ import base.pollutionSensor.PollutionReading;
 import base.pollutionSensor.PollutionSensorGrpc.PollutionSensorImplBase;
 import project.pojo.PollutionPojo;
 import project.util.DataUtil;
-import project.util.TimeUtil;
+import util.TimeUtil;
 
 public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 

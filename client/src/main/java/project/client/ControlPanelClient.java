@@ -13,8 +13,12 @@ import base.controlPanel.DeviceStatusResponse;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
+import io.grpc.stub.MetadataUtils;
 import io.grpc.stub.StreamObserver;
+import project.callback.CallBack;
 import project.jmdns.JmDnsServiceDiscovery;
+import project.util.AuthenticationUtil;
+import util.TimeUtil;
 
 public class ControlPanelClient {
 
@@ -24,34 +28,48 @@ public class ControlPanelClient {
 	 * Set device status.
 	 * 
 	 * @param channel
+	 * @param token
+	 * @param status
+	 * @return
 	 */
-	public static void setDeviceStatusInvoke(ManagedChannel channel) {
+	public static String setDeviceStatusInvoke(ManagedChannel channel, String token, String statusStr) {
 		ControlPanelGrpc.ControlPanelBlockingStub controlPanleService = ControlPanelGrpc.newBlockingStub(channel);
 		DeviceStatusRequest.Builder builder = DeviceStatusRequest.newBuilder();
-		builder.setDeviceId("0000");
-		builder.setStatus(false);
+		builder.setDeviceId("0000-1");
+		builder.setStatus(Boolean.parseBoolean(statusStr));
 		DeviceStatusRequest request = builder.build();
-		DeviceStatusResponse response = controlPanleService.setDeviceStatus(request);
+		// Send a request with interceptor validation.
+		DeviceStatusResponse response = controlPanleService
+				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild(token)))
+				.setDeviceStatus(request);
 		String deviceId = response.getDeviceId();
 		boolean status = response.getStatus();
 		LOGGER.info(deviceId + ", " + status);
+
+		return "Set device status success, device id is: " + deviceId + ", and status is: " + status;
 	}
 
 	/**
 	 * Get device status.
 	 * 
 	 * @param channel
+	 * @param token
+	 * @param callBack
 	 * @throws InterruptedException
 	 */
-	public static void getDeviceStatusInvoke(ManagedChannel channel) throws InterruptedException {
+	public static void getDeviceStatusInvoke(ManagedChannel channel, String token, CallBack callBack)
+			throws InterruptedException {
 		ControlPanelGrpc.ControlPanelStub controlPanelStub = ControlPanelGrpc.newStub(channel);
-		StreamObserver<DeviceIdentifier> reqObserver = controlPanelStub
+		// Send a request with interceptor validation.
+		StreamObserver<DeviceIdentifier> respoonse = controlPanelStub
+				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild(token)))
 				.getDeviceStatus(new StreamObserver<DeviceStatusResponse>() {
 
 					@Override
 					public void onNext(DeviceStatusResponse value) {
 						LOGGER.info("method 2 gets a response, value is: " + value);
-
+						callBack.show(TimeUtil.getTimeNow() + " The device id is: " + value.getDeviceId()
+								+ ", and status is: " + value.getStatus());
 					}
 
 					@Override
@@ -65,33 +83,37 @@ public class ControlPanelClient {
 					}
 				});
 
-		// TODO set data through client here
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 2; i++) {
 			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
-			// TODO set device id here
 			builder.setDeviceId("0000-" + i);
 			DeviceIdentifier request = builder.build();
-			reqObserver.onNext(request);
-			Thread.sleep(1000);
+			respoonse.onNext(request);
+//			Thread.sleep(1000);
 		}
 
-		reqObserver.onCompleted();
+		respoonse.onCompleted();
 	}
 
 	/**
 	 * Get device logs.
 	 * 
 	 * @param channel
+	 * @param token
+	 * @param callBack
 	 * @throws InterruptedException
 	 */
-	public static void streamDeviceLogsInvoke(ManagedChannel channel) throws InterruptedException {
+	public static void streamDeviceLogsInvoke(ManagedChannel channel, String token, CallBack callBack)
+			throws InterruptedException {
 		ControlPanelGrpc.ControlPanelStub controlPanelStub = ControlPanelGrpc.newStub(channel);
-		StreamObserver<DeviceIdentifier> requestObserver = controlPanelStub
+		// Send a request with interceptor validation.
+		StreamObserver<DeviceIdentifier> response = controlPanelStub
+				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild(token)))
 				.streamDeviceLogs(new StreamObserver<DeviceLog>() {
 
 					@Override
 					public void onNext(DeviceLog value) {
 						LOGGER.info("Client 1 value is: " + value);
+						callBack.show(value.getLogMessage());
 					}
 
 					@Override
@@ -101,20 +123,20 @@ public class ControlPanelClient {
 
 					@Override
 					public void onCompleted() {
+
 						LOGGER.info("Client 1 is complated");
 					}
 				});
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 2; i++) {
 			DeviceIdentifier.Builder builder = DeviceIdentifier.newBuilder();
 			builder.setDeviceId("0000-" + i);
 			DeviceIdentifier request = builder.build();
-			requestObserver.onNext(request);
+			response.onNext(request);
 
-			Thread.sleep(1000);
 		}
 
-		requestObserver.onCompleted();
+		response.onCompleted();
 	}
 
 	public static void main(String[] args) throws InterruptedException {
@@ -122,9 +144,17 @@ public class ControlPanelClient {
 		ManagedChannel channel = Grpc
 				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
-			setDeviceStatusInvoke(channel);
+//			setDeviceStatusInvoke(channel, "");
 //			getDeviceStatusInvoke(channel);
-//			streamDeviceLogsInvoke(channel);
+			streamDeviceLogsInvoke(channel, "", new CallBack() {
+
+				@Override
+				public void show(String result) {
+					// TODO Auto-generated method stub
+					System.out.println("===============This is callback result: " + result + "==============");
+				}
+
+			});
 
 			channel.awaitTermination(120, TimeUnit.SECONDS);
 		} catch (Exception e) {

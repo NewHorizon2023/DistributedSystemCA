@@ -18,7 +18,8 @@ import project.util.AuthenticationUtil;
 public class WeatherClient {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeatherClient.class);
 
-	public static void getWeatherForecastInvoke(double latitude, double longitude, ManagedChannel channel) {
+	public static void getWeatherForecastInvoke(double latitude, double longitude, ManagedChannel channel,
+			String token) {
 		WeatherGrpc.WeatherBlockingStub service = WeatherGrpc.newBlockingStub(channel);
 		WeatherForecastRequest.Builder builder = WeatherForecastRequest.newBuilder();
 		builder.setLatitude(latitude).setLongitude(longitude);
@@ -26,7 +27,7 @@ public class WeatherClient {
 
 		// Call the RPC method with the request and metadata
 		WeatherForecastResponse response = service
-				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild()))
+				.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(AuthenticationUtil.headersBuild(token)))
 				.getWeatherForecast(request);
 
 		LOGGER.info("Response received: " + response);
@@ -39,7 +40,7 @@ public class WeatherClient {
 		ManagedChannel channel = Grpc
 				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
-			getWeatherForecastInvoke(1, 2, channel);
+			getWeatherForecastInvoke(1, 2, channel, "");
 
 			channel.awaitTermination(120, TimeUnit.SECONDS);
 		} catch (Exception e) {

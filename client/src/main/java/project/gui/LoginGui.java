@@ -44,42 +44,32 @@ public class LoginGui {
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		// 添加登录按钮点击事件监听器
+		// Add login button click event listener.
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String username = text.getText();
 				String password = new String(jp.getPassword());
 
-				// 进行登录操作
 				LoginResponse response = LoginClient.login(username, password, GrpcChannelManager.getInstance());
-
+				// Login success.
 				if (response.getSuccess()) {
-					// 登录成功，关闭当前窗口，打开新窗口
-					jf.dispose(); // 关闭当前登录窗口
+					// close current window
+					jf.dispose();
 
-					// 创建并显示新窗口
-					PanelGui.panel();
+					// Create and display a new window, and set token into it.
+					try {
+						PanelGui.buildPanel(response.getToken());
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 				} else {
-					// 登录失败，弹出警告窗口
+					// Login failed, pop-up warning window
 					JOptionPane.showMessageDialog(jf, "Login failed. Please check your username and password.",
 							"Login Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-	}
-
-	// 创建并显示新窗口的方法
-	public static void createNewWindow() {
-		JFrame newFrame = new JFrame("New Window");
-		newFrame.setSize(400, 300);
-		newFrame.setLocationRelativeTo(null);
-
-		// 添加新窗口的内容和组件
-		// TODO: 添加新窗口的内容
-
-		newFrame.setVisible(true);
-		newFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 
 }
