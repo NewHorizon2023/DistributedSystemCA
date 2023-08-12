@@ -181,7 +181,6 @@ public class PanelGui {
 				weatherTextArea.append("Longitude: " + response.getLongitude() + "\n");
 				weatherTextArea.append("Temperature: " + response.getTemperature() + "\n");
 				weatherTextArea.append("Humidity: " + response.getHumidity() + "\n");
-				weatherTextArea.append("Humidity: " + response.getHumidity() + "\n");
 				weatherTextArea.append("Wind Speed: " + response.getWindSpeed() + "\n");
 				weatherTextArea.append("Precipitation: " + response.getPrecipitation() + "\n");
 				weatherTextArea.append("Timestamp: " + response.getTimestamp() + "\n");
