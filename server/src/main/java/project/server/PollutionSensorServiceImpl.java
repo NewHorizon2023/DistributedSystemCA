@@ -18,6 +18,13 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 	 */
 	public static List<PollutionPojo> pollutionPojoList = new ArrayList<>();
 
+	static {
+		for (int i = 0; i < 3; i++) {
+			PollutionPojo pojo = new PollutionPojo(53.349805, -6.26031, getPollutionLevel(), TimeUtil.getTimeNow());
+			pollutionPojoList.add(pojo);
+		}
+	}
+
 	/**
 	 * <pre>
 	 * RPC Method 1: GetPollutionLevel
@@ -30,8 +37,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 		double latitude = request.getLatitude();
 		double longitude = request.getLongitude();
 
-		// Generate pollution data while the devide status is "true".
-		while (ControlPanelServiceImpl.deviceStatus) {
+		for (int i = 0; i < 5; i++) {
 			// Get pollution data.
 			double level = getPollutionLevel();
 			String timestamp = TimeUtil.getTimeNow();
@@ -50,7 +56,7 @@ public class PollutionSensorServiceImpl extends PollutionSensorImplBase {
 
 			try {
 				// Give a 1 second gap to response
-				Thread.sleep(2000);
+//				Thread.sleep(500);
 			} catch (Exception e) {
 				e.getStackTrace();
 			}

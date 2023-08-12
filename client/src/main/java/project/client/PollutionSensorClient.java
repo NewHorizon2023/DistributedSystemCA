@@ -16,6 +16,7 @@ import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.MetadataUtils;
+import project.callback.CallBack;
 import project.jmdns.JmDnsServiceDiscovery;
 import project.util.AuthenticationUtil;
 
@@ -29,9 +30,10 @@ public class PollutionSensorClient {
 	 * @param longitude
 	 * @param channel
 	 * @param token
+	 * @param callBack
 	 */
-	public static void getPollutionLevelInvoke(double latitude, double longitude, ManagedChannel channel,
-			String token) {
+	public static void getPollutionLevelInvoke(double latitude, double longitude, ManagedChannel channel, String token,
+			CallBack callBack) {
 		PollutionSensorGrpc.PollutionSensorBlockingStub service = PollutionSensorGrpc.newBlockingStub(channel);
 		PollutionLocation.Builder builder = PollutionLocation.newBuilder();
 		builder.setLatitude(latitude);
@@ -44,9 +46,11 @@ public class PollutionSensorClient {
 		// Get pollution level infomation
 		while (pollutionLevelIterator.hasNext()) {
 			PollutionReading pollution = pollutionLevelIterator.next();
-			// TODO show these data on gui.
 			double pollutionLevel = pollution.getPollutionLevel();
 			String timestamp = pollution.getTimestamp();
+
+			// Show the response data on the GUI board.
+			callBack.show("Timestamp: " + timestamp + "      Pollution Level: " + pollutionLevel);
 			LOGGER.info("pollution level: " + pollutionLevel + "time: " + timestamp);
 		}
 
@@ -83,7 +87,14 @@ public class PollutionSensorClient {
 		ManagedChannel channel = Grpc
 				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
-			getPollutionLevelInvoke(1, 2, channel, "");
+			getPollutionLevelInvoke(1, 2, channel, "", new CallBack() {
+
+				@Override
+				public void show(String result) {
+					LOGGER.info(result);
+				}
+			});
+
 			getPollutionHistoryInvoke(1, 2, "2023-08-09 20:00:00", "2023-08-09 21:00:00", channel, "");
 
 			channel.awaitTermination(120, TimeUnit.SECONDS);

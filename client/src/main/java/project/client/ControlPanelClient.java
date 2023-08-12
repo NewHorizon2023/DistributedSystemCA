@@ -67,9 +67,10 @@ public class ControlPanelClient {
 
 					@Override
 					public void onNext(DeviceStatusResponse value) {
-						LOGGER.info("method 2 gets a response, value is: " + value);
+						// Show the response data on the GUI board.
 						callBack.show(TimeUtil.getTimeNow() + " The device id is: " + value.getDeviceId()
 								+ ", and status is: " + value.getStatus());
+						LOGGER.info("method 2 gets a response, value is: " + value);
 					}
 
 					@Override
@@ -112,8 +113,9 @@ public class ControlPanelClient {
 
 					@Override
 					public void onNext(DeviceLog value) {
-						LOGGER.info("Client 1 value is: " + value);
+						// Show the response data on the GUI board.
 						callBack.show(value.getLogMessage());
+						LOGGER.info("Client 1 value is: " + value);
 					}
 
 					@Override
@@ -123,7 +125,6 @@ public class ControlPanelClient {
 
 					@Override
 					public void onCompleted() {
-
 						LOGGER.info("Client 1 is complated");
 					}
 				});

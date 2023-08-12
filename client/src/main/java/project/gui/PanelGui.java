@@ -5,21 +5,25 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import base.pollutionSensor.PollutionReading;
+import base.weather.WeatherForecastResponse;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 import project.callback.CallBack;
 import project.client.ControlPanelClient;
+import project.client.PollutionSensorClient;
+import project.client.WeatherClient;
 import project.jmdns.JmDnsServiceDiscovery;
 
 public class PanelGui {
@@ -81,7 +85,7 @@ public class PanelGui {
 		weatherTextArea.setLineWrap(true); // 设置自动换行
 		weatherTextArea.setWrapStyleWord(true); // 设置以单词为单位换行
 		JScrollPane weatherScrollPane = new JScrollPane(weatherTextArea);
-		weatherScrollPane.setPreferredSize(new Dimension(400, 100)); // 设置首选大小
+		weatherScrollPane.setPreferredSize(new Dimension(400, 150)); // 设置首选大小
 		weatherPanel.add(weatherScrollPane, BorderLayout.SOUTH);
 
 		// Adding panels to frame
@@ -99,8 +103,9 @@ public class PanelGui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String stauts = (String) deviceIdDropdown.getSelectedItem();
+				controlPanelTextArea.setText(null);
 				String result = ControlPanelClient.setDeviceStatusInvoke(channel, token, stauts);
-				controlPanelTextArea.setText(result);
+				controlPanelTextArea.append(result + "\n");
 			}
 		});
 
@@ -108,11 +113,12 @@ public class PanelGui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					controlPanelTextArea.setText(null);
 					ControlPanelClient.getDeviceStatusInvoke(channel, token, new CallBack() {
 
 						@Override
 						public void show(String message) {
-							controlPanelTextArea.setText(message);
+							controlPanelTextArea.append(message + "\n");
 						}
 					});
 				} catch (InterruptedException e1) {
@@ -126,11 +132,12 @@ public class PanelGui {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
+					controlPanelTextArea.setText(null);
 					ControlPanelClient.streamDeviceLogsInvoke(channel, token, new CallBack() {
 
 						@Override
 						public void show(String message) {
-							controlPanelTextArea.setText(message);
+							controlPanelTextArea.append(message + "\n");
 						}
 					});
 				} catch (InterruptedException e1) {
@@ -142,43 +149,48 @@ public class PanelGui {
 		getPollutionLevelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Call GetDeviceStatus gRPC method here
-				String selectedDeviceId = (String) deviceIdDropdown.getSelectedItem();
-				// TODO: Call GetDeviceStatus method with selectedDeviceId
+				pollutionSensorTextArea.setText(null);
+				PollutionSensorClient.getPollutionLevelInvoke(53.349805, -6.26031, channel, token, new CallBack() {
+
+					@Override
+					public void show(String result) {
+						pollutionSensorTextArea.append(result + "\n");
+					}
+				});
 			}
 		});
 
 		getPollutionHistoryBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Call GetDeviceStatus gRPC method here
-				String selectedDeviceId = (String) deviceIdDropdown.getSelectedItem();
-				// TODO: Call GetDeviceStatus method with selectedDeviceId
+				pollutionSensorTextArea.setText(null);
+				List<PollutionReading> list = PollutionSensorClient.getPollutionHistoryInvoke(53.349805, -6.26031,
+						"2023-08-12 00:00:00", "2025-08-12 00:00:00", channel, token);
+				for (PollutionReading pollutionReading : list) {
+					pollutionSensorTextArea.append("Timestamp: " + pollutionReading.getTimestamp() + "      "
+							+ "Pollution Level: " + pollutionReading.getPollutionLevel() + "\n");
+				}
+
 			}
 		});
 
 		getWeatherForecastBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Call GetDeviceStatus gRPC method here
-				String selectedDeviceId = (String) deviceIdDropdown.getSelectedItem();
-				// TODO: Call GetDeviceStatus method with selectedDeviceId
+				WeatherForecastResponse response = WeatherClient.getWeatherForecastInvoke(53.349805, -6.26031, channel,
+						token);
+				weatherTextArea.setText(null);
+				weatherTextArea.append("Latitude: " + response.getLatitude() + "\n");
+				weatherTextArea.append("Longitude: " + response.getLongitude() + "\n");
+				weatherTextArea.append("Temperature: " + response.getTemperature() + "\n");
+				weatherTextArea.append("Humidity: " + response.getHumidity() + "\n");
+				weatherTextArea.append("Humidity: " + response.getHumidity() + "\n");
+				weatherTextArea.append("Wind Speed: " + response.getWindSpeed() + "\n");
+				weatherTextArea.append("Precipitation: " + response.getPrecipitation() + "\n");
+				weatherTextArea.append("Timestamp: " + response.getTimestamp() + "\n");
 			}
 		});
 
 	}
 
-	private static JTextArea popupTextArea = new JTextArea();
-
-	private static void showPopup() {
-		popupTextArea.setEditable(true);
-		JScrollPane scrollPane = new JScrollPane(popupTextArea);
-		scrollPane.setPreferredSize(new java.awt.Dimension(300, 150));
-
-		JOptionPane.showMessageDialog(null, scrollPane, "Popup Title", JOptionPane.PLAIN_MESSAGE);
-	}
-
-	private static void changeContent(String newContent) {
-		popupTextArea.setText(newContent);
-	}
 }

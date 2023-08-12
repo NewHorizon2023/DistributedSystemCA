@@ -18,8 +18,17 @@ import project.util.AuthenticationUtil;
 public class WeatherClient {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeatherClient.class);
 
-	public static void getWeatherForecastInvoke(double latitude, double longitude, ManagedChannel channel,
-			String token) {
+	/**
+	 * Get weather infomation.
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @param channel
+	 * @param token
+	 * @return
+	 */
+	public static WeatherForecastResponse getWeatherForecastInvoke(double latitude, double longitude,
+			ManagedChannel channel, String token) {
 		WeatherGrpc.WeatherBlockingStub service = WeatherGrpc.newBlockingStub(channel);
 		WeatherForecastRequest.Builder builder = WeatherForecastRequest.newBuilder();
 		builder.setLatitude(latitude).setLongitude(longitude);
@@ -33,10 +42,11 @@ public class WeatherClient {
 		LOGGER.info("Response received: " + response);
 		LOGGER.info("Humidity: " + response.getHumidity());
 
+		return response;
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		// TODO For test.
+		// For test.
 		ManagedChannel channel = Grpc
 				.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create()).build();
 		try {
