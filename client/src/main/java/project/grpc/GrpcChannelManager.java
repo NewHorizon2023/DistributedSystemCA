@@ -11,12 +11,12 @@ public class GrpcChannelManager {
 	private static ManagedChannel channel;
 
 	private GrpcChannelManager() {
-		// 私有构造函数，确保只能通过 getInstance() 方法获取实例
+		// Private constructor to ensure that the instance can only be obtained through the getInstance() method
 	}
 
 	public static synchronized ManagedChannel getInstance() {
 		if (channel == null || channel.isShutdown()) {
-			// 创建 channel
+			// Create channels
 			try {
 				channel = Grpc
 						.newChannelBuilder(JmDnsServiceDiscovery.discoverTarget(), InsecureChannelCredentials.create())
@@ -26,7 +26,7 @@ public class GrpcChannelManager {
 				e.printStackTrace();
 			}
 
-			// 添加钩子，在 JVM 关闭时关闭 channel
+			// Add hook to close channel when JVM shuts down
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 				if (channel != null) {
 					try {

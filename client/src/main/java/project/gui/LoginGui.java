@@ -22,7 +22,7 @@ public class LoginGui {
 		JFrame jf = new JFrame("Login");
 		jf.setSize(400, 250);
 		jf.setLocationRelativeTo(null);
-		jf.setLayout(new FlowLayout(FlowLayout.CENTER)); // 设置布局为居中对齐
+		jf.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		JLabel nameLable = new JLabel("Username:");
 		JTextField text = new JTextField("admin", 30);

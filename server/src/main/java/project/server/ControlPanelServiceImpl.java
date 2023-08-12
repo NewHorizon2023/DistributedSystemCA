@@ -91,19 +91,19 @@ public class ControlPanelServiceImpl extends ControlPanelImplBase {
 			public void onNext(DeviceIdentifier value) {
 				LOGGER.info("Server 1 method 3 value is: " + value);
 				DeviceLog response1 = DeviceLog.newBuilder()
-						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "--: The device is running normally."
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
 								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response1);
 
 				DeviceLog response2 = DeviceLog.newBuilder()
-						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "---: The device is running normally."
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
 								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response2);
 
 				DeviceLog response3 = DeviceLog.newBuilder()
-						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + "-----: The device is running normally."
+						.setLogMessage(deviceStatus ? TimeUtil.getTimeNow() + ": The device is running normally."
 								: TimeUtil.getTimeNow() + ": The device has stopped running.")
 						.setTimestamp(TimeUtil.getTimeNow()).build();
 				responseObserver.onNext(response3);
